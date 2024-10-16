@@ -8,3 +8,4 @@ if (isset($_POST['Send'])) {
 else {
     header("location: index.php?ToiletID=0G&Done=False");
 }
+exit();

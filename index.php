@@ -1,19 +1,26 @@
+<?php
+// vage pokkenzooi
+ob_start();
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <title>Schadeformulier toilet</title>
     <link rel="stylesheet" href="style.css">
 </head>
-    <?php include "Shared_Vars.php"; ?>
-    <?php if (!(ValidateToiletID($_GET["ToiletID"]))) {$ToiletID = "0G";} else {$ToiletID = $_GET["ToiletID"];} ?>
-    <?php if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;} ?>
-
     <body>
+        <?php
+            include "Shared_Vars.php";
+            if (!(ValidateToiletID($_GET["ToiletID"]))) {header("location: ToiletChooser.php"); exit();} $ToiletID = $_GET["ToiletID"];
+            if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;}
+        ?>
         <h1>Schadeformulier <?php echo $GLOBALS["ToiletList"][$ToiletID]; ?></h1>
         <?php if(!$Done) {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
+
         <!--Evidence form-->
         <form action="FormHandler.php" method="post">
-            <input type="hidden" name="ToiletID" value=<?php echo $ToiletID; ?>>
+            <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
             <input type="hidden" name="CurrentDate" value=<?php echo time(); ?>>
 
             <textarea name="Description" placeholder="Wat is er precies gebeurd?"></textarea>
@@ -28,3 +35,8 @@
     </body>
 
 </html>
+
+<?php
+// meer vage pokkenzooi
+ob_end_flush();
+?>

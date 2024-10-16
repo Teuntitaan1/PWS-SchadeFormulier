@@ -10,7 +10,6 @@ $GLOBALS["ToiletList"] = [
     "3F" => "vrouwentoilet 2e verdieping",
     "0G" => "genderneutrale toilet",
 ];
-
 function ValidateToiletID($ID): bool
 {
     if($ID != null) {
