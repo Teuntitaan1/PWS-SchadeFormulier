@@ -1,7 +1,8 @@
 <?php
 if (isset($_POST['Send'])) {
-    echo "Hello world!";
+    $ToiletID = $_POST["ToiletID"];
+    header("location: index.php?ToiletID=$ToiletID&Done=True");
 }
 else {
-    echo "<p>Volgensmij hoor jij hier niet te zijn! Wil je schade aangeven? Doe dat dan<a href='ToiletChooser.php'>hier</a>.</p>";
+    header("location: index.php?ToiletID=0G&Done=False");
 }

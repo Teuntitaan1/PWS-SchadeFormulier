@@ -1,5 +1,5 @@
 <?php
-$ToiletList = [
+$GLOBALS["ToiletList"] = [
     "0M" => "mannentoilet begane grond",
     "0F" => "vrouwentoilet begane grond",
     "1M" => "mannentoilet 1e verdieping",
@@ -10,3 +10,13 @@ $ToiletList = [
     "3F" => "vrouwentoilet 2e verdieping",
     "0G" => "genderneutrale toilet",
 ];
+
+function ValidateToiletID($ID): bool
+{
+    if($ID != null) {
+        if($GLOBALS["ToiletList"][$ID] != null) {
+            return true;
+        }
+    }
+    return false;
+}

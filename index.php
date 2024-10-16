@@ -5,10 +5,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
     <?php include "Shared_Vars.php"; ?>
-    <?php if ($_GET["ToiletID"] == null) {$ToiletID = "1M";} else {$ToiletID = $_GET["ToiletID"];} ?>
-    <?php if ($_GET["Done"] == "True") {$Done = "True";} else {$Done = "False";} ?>
+    <?php if (!(ValidateToiletID($_GET["ToiletID"]))) {$ToiletID = "1M";} else {$ToiletID = $_GET["ToiletID"];} ?>
+    <?php if ($_GET["Done"] != "True") {$Done = "False";} else {$Done = "True";} ?>
+
     <body>
-        <h1>Schadeformulier <?php if (isset($ToiletList)) {echo $ToiletList[$ToiletID];} ?></h1>
+        <h1>Schadeformulier <?php if (isset($GLOBALS["ToiletList"])) {echo $GLOBALS["ToiletList"][$ToiletID];} ?></h1>
         <p>Niet het goede toilet? Pas het <a href="ToiletChooser.php">hier</a> aan.</p>
         <!--Evidence form-->
         <form action="FormHandler.php" method="post">
