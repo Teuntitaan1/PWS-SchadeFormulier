@@ -5,12 +5,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
     <?php include "Shared_Vars.php"; ?>
-    <?php if (!(ValidateToiletID($_GET["ToiletID"]))) {$ToiletID = "1M";} else {$ToiletID = $_GET["ToiletID"];} ?>
-    <?php if ($_GET["Done"] != "True") {$Done = "False";} else {$Done = "True";} ?>
+    <?php if (!(ValidateToiletID($_GET["ToiletID"]))) {$ToiletID = "0G";} else {$ToiletID = $_GET["ToiletID"];} ?>
+    <?php if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;} ?>
 
     <body>
-        <h1>Schadeformulier <?php if (isset($GLOBALS["ToiletList"])) {echo $GLOBALS["ToiletList"][$ToiletID];} ?></h1>
-        <p>Niet het goede toilet? Pas het <a href="ToiletChooser.php">hier</a> aan.</p>
+        <h1>Schadeformulier <?php echo $GLOBALS["ToiletList"][$ToiletID]; ?></h1>
+        <?php if(!$Done) {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
         <!--Evidence form-->
         <form action="FormHandler.php" method="post">
             <input type="hidden" name="ToiletID" value=<?php echo $ToiletID; ?>>
@@ -20,10 +20,10 @@
             Leerlingnummer <input type="number" name="StudentNumber" min="30000" max="50000">
             <input type="file" name="Evidence" accept="image/jpeg">
 
-            <input type="submit" name="Send" value="Verstuur" <?php if ($Done == "True") {echo "disabled";} ?>>
+            <input type="submit" name="Send" value="Verstuur" <?php if ($Done) {echo "disabled";} ?>>
         </form>
 
-        <p><?php if ($Done == "True") {echo "Bedankt voor het invullen :) We gaan meteen aan de bak!";} ?></p>
+        <?php if ($Done) {echo "<p>Bedankt voor het invullen :) We gaan meteen aan de bak! Nog een schadeformulier invullen? Klik <a href='index.php?ToiletID=$ToiletID&Done=False'>Hier</a>.</p>";} ?>
 
     </body>
 
