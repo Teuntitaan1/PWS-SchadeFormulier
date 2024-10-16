@@ -6,9 +6,10 @@
 </head>
     <?php include "Shared_Vars.php"; ?>
     <?php if ($_GET["ToiletID"] == null) {$ToiletID = "1M";} else {$ToiletID = $_GET["ToiletID"];} ?>
-
+    <?php if ($_GET["Done"] == "True") {$Done = "True";} else {$Done = "False";} ?>
     <body>
         <h1>Schadeformulier <?php if (isset($ToiletList)) {echo $ToiletList[$ToiletID];} ?></h1>
+        <p>Niet het goede toilet? Pas het <a href="ToiletChooser.php">hier</a> aan.</p>
         <!--Evidence form-->
         <form action="FormHandler.php" method="post">
             <input type="hidden" name="ToiletID" value=<?php echo $ToiletID; ?>>
@@ -18,10 +19,10 @@
             Leerlingnummer <input type="number" name="StudentNumber" min="30000" max="50000">
             <input type="file" name="Evidence" accept="image/jpeg">
 
-            <input type="submit" name="Send" value="Verstuur" <?php if ($_GET["Done"] == "True") {echo "disabled";} ?>>
+            <input type="submit" name="Send" value="Verstuur" <?php if ($Done == "True") {echo "disabled";} ?>>
         </form>
 
-        <p><?php if ($_GET["Done"] == "True") {echo "Bedankt voor het invullen :) We gaan meteen aan de bak";} ?></p>
+        <p><?php if ($Done == "True") {echo "Bedankt voor het invullen :) We gaan meteen aan de bak!";} ?></p>
 
     </body>
 
