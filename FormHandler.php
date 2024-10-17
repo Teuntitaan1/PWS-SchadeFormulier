@@ -6,6 +6,6 @@ if (isset($_POST['Send'])) {
     header("location: index.php?ToiletID=$ToiletID&Done=True");
 }
 else {
-    header("location: index.php?ToiletID=0G&Done=False");
+    header("location: index.php");
 }
 exit();

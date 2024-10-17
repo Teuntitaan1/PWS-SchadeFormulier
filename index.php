@@ -21,8 +21,7 @@ ob_start();
         <!--Evidence form-->
         <form action="FormHandler.php" method="post">
             <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
-            <input type="hidden" name="CurrentDate" value=<?php echo time(); ?>>
-
+            <!--Op de server verzameld hij ook een timestamp, dit hoeft daarom hier niet.-->
             <textarea name="Description" placeholder="Wat is er precies gebeurd?"></textarea>
             Leerlingnummer <input type="number" name="StudentNumber" min="30000" max="50000">
             <input type="file" name="Evidence" accept="image/jpeg">
