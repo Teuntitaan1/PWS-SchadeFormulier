@@ -7,11 +7,11 @@ ob_start();
 <html lang="nl">
 <head>
     <title>Schadeformulier toilet</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
     <body>
         <?php
-            include "Shared_Vars.php";
+            include "../Shared_Vars.php";
             if (!(ValidateToiletID($_GET["ToiletID"]))) {header("location: ToiletChooser.php"); exit();} $ToiletID = $_GET["ToiletID"];
             if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;}
         ?>
@@ -19,11 +19,10 @@ ob_start();
         <?php if(!$Done) {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
 
         <!--Evidence form-->
-        <form action="FormHandler.php" method="post">
+        <form action="../Backend/FormHandler.php" method="post">
             <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
             <!--Op de server verzameld hij ook een timestamp, dit hoeft daarom hier niet.-->
-            <textarea name="Description" placeholder="Wat is er precies gebeurd?"></textarea>
-            Leerlingnummer <input type="number" name="StudentNumber" min="30000" max="50000">
+            <label for="Discription"><textarea name="Description" placeholder="Wat is er precies gebeurd?"></textarea></label>
             <input type="file" name="Evidence" accept="image/jpeg">
 
             <input type="submit" name="Send" value="Verstuur" <?php if ($Done) {echo "disabled";} ?>>
