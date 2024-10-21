@@ -19,7 +19,7 @@ ob_start();
         <?php if(!$Done) {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
 
         <!--Evidence form-->
-        <form action="../Backend/FormHandler.php" method="post">
+        <form action="../Backend/FormHandler.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
             <!--Op de server verzameld hij ook een timestamp, dit hoeft daarom hier niet.-->
             <label for="Discription"><textarea name="Description" placeholder="Wat is er precies gebeurd?"></textarea></label>
