@@ -1,4 +1,4 @@
-<?php include "../Shared_Vars.php"; ?>
+<?php include "../Shared_Vars.php"; //include "./SQLConfig.php" ?>
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -54,14 +54,45 @@
 
 
         <?php
+
+            // Lege query die opgevult wordt
+            $Query = "";
             if(isset($_GET["Keyword"])) {
-                echo "Sigma";
-                // TODO op basis van de filters moeten er queries gebouwd worden, deze moeten dan toegepast worden en alles moet laten zien worden
+                // Keywords om op te filteren
+                $Keywords = explode(",", $_GET["Keyword"]);
+                // format("m/d/y H:i:s");
+                $CurrentDate = new DateTime();
+                // pas $Date aan aan de juiste filter, voorbeeld: 2024-10-21 16-1:04:2 dus 2024-10-21 16-1:04:2
+                switch ($_GET["Date"]) {
+                    //TODO aapassen voor specifieke perioode
+                    case "PastHour":
+                        $CurrentDate->sub(new DateInterval("PT1H")); break;
+                    case "PastDay":
+                        $CurrentDate->sub(new DateInterval("P1D")); break;
+                    case "PastWeek":
+                        $CurrentDate->sub(new DateInterval("P1W")); break;
+                    case "PastMonth":
+                        $CurrentDate->sub(new DateInterval("P1M")); break;
+                    case "PastYear":
+                        $CurrentDate->sub(new DateInterval("P1Y")); break;
+                }
+                // TODO op basis van de filters moeten er queries gebouwd worden, deze moeten dan toegepast worden en alles moet laten zien worden, alle niet aangepaste filters kunnen zo de query in.
             }
             else {
                 echo "Beta";
                 // TODO als er geen filters toegepast zijn, laat ze van vandaag zien.
+                $Query = "SELECT * FROM `SchadeServer`";
             }
+
+//            $Result = $Connection->query($Query);
+//
+//            if ($Result->num_rows > 0) {
+//                // Data laten zien ofzo
+//                while($Row = $Result->fetch_assoc()) {
+//                    echo 'Hier moet een nette weergave komen';
+//                }
+//            }
+//            $Connection->close();
         ?>
     </body>
 
