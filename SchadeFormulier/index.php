@@ -1,17 +1,15 @@
-<?php
-// vage pokkenzooi
-ob_start();
-?>
+<!-- Vage pokkenzooi -->
+<?php ob_start(); ?>
 
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <title>Schadeformulier toilet</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
     <body>
         <?php
-            include "../Shared_Vars.php";
+            include "./Shared_Vars.php";
             if (!(ValidateToiletID($_GET["ToiletID"]))) {header("location: ToiletChooser.php"); exit();} $ToiletID = $_GET["ToiletID"];
             if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;}
         ?>
@@ -19,7 +17,7 @@ ob_start();
         <?php if(!$Done) {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
 
         <!--Evidence form-->
-        <form action="../Backend/FormHandler.php" method="post" enctype="multipart/form-data">
+        <form action="./FormHandler.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
             <!--Op de server verzameld hij ook een timestamp, dit hoeft daarom hier niet.-->
             <label for="Discription"><textarea name="Description" placeholder="Wat is er precies gebeurd?"></textarea></label>
@@ -34,7 +32,5 @@ ob_start();
 
 </html>
 
-<?php
-// meer vage pokkenzooi
-ob_end_flush();
-?>
+<!-- Meer vage pokkenzooi -->
+<?php ob_end_flush(); ?>

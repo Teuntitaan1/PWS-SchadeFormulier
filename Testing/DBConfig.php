@@ -6,8 +6,8 @@ $Password = "Bte0k";
 $DatabaseName = "db_39506";
 
 $Connection = new mysqli($ServerName, $Username, $Password, $DatabaseName);
-if($Connection->Connect_Error) {
-    die("Connection Failed" . $Connection->Connect_Error);
+if($Connection->connect_error) {
+    die("Connection Failed" . $Connection->connect_error);
 }
 
 // Test query
