@@ -8,7 +8,7 @@ $GLOBALS["ToiletList"] = [
     "2F" => "vrouwentoilet 2e verdieping",
     "3M" => "mannentoilet 3e verdieping",
     "3F" => "vrouwentoilet 3e verdieping",
-    "0G" => "genderneutrale toilet",
+    "0G" => "genderneutraal toilet",
 ];
 
 function ValidateToiletID($ID): bool

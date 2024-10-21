@@ -1,15 +1,18 @@
 <!-- Vage pokkenzooi -->
-<?php ob_start(); ?>
+<?php
+ob_start();
+include "../Shared_Vars.php";
+?>
 
 <!DOCTYPE html>
 <html lang="nl">
-<head>
-    <title>Schadeformulier toilet</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <head>
+        <title>Schadeformulier toilet</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
     <body>
         <?php
-            include "./Shared_Vars.php";
             if (!(ValidateToiletID($_GET["ToiletID"]))) {header("location: ToiletChooser.php"); exit();} $ToiletID = $_GET["ToiletID"];
             if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;}
         ?>
@@ -18,9 +21,12 @@
 
         <!--Evidence form-->
         <form action="./FormHandler.php" method="post" enctype="multipart/form-data">
+
             <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
-            <!--Op de server verzameld hij ook een timestamp, dit hoeft daarom hier niet.-->
-            <label for="Discription"><textarea name="Description" placeholder="Wat is er precies gebeurd?"></textarea></label>
+
+            <label for="Description">Beschrijving</label>
+            <textarea id="Description" name="Description" placeholder="Wat is er precies gebeurd?" minlength="10"></textarea>
+
             <input type="file" name="Evidence" accept="image/jpeg">
 
             <input type="submit" name="Send" value="Verstuur" <?php if ($Done) {echo "disabled";} ?>>

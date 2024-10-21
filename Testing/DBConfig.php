@@ -17,7 +17,7 @@ $Result = $Connection->query($Query);
 if ($Result->num_rows > 0) {
     // output data of each row
     while($Row = $Result->fetch_assoc()) {
-      echo '<img src="data:image/'.$Row["BestandType"].';base64,'.base64_encode($Row['Bewijs']).'"/>';
+      echo '<img src="data:image/'.$Row["BestandType"].';base64,'.$Row['Bewijs'].'"/>';
     }
   } 
 $Connection->close();

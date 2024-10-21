@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <?php include "./Shared_Vars.php" ?>
+    <?php include "../Shared_Vars.php" ?>
     <h1>Schadeformulier ...</h1>
     <h3>Kies je toilet:</h3>
 
