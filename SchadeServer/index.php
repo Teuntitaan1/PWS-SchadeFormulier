@@ -1,4 +1,7 @@
-<?php include "../Shared_Vars.php"; include "./QueryBuilder.php" //include "./SQLConfig.php" ?>
+<?php
+    require __DIR__ . '/Shared_Vars.php';
+    require __DIR__ . '/QueryBuilder.php';
+?>
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -54,17 +57,24 @@
 
 
         <?php
+            // SQL Connectie
+            $Connection = new mysqli("localhost", "39506", "Bte0k", "db_39506");
+            if($Connection->connect_error) { die("Connection Failed" . $Connection->connect_error); }
+
+            // bouwt de query op op basis van de filters
             $Query = BuildQuery($_GET["Keyword"], $_GET["Date"], $_GET["ToiletID"],$_GET["Origin"], $_GET["Validity"]);
             echo $Query;
-//            $Result = $Connection->query($Query);
-//
-//            if ($Result->num_rows > 0) {
-//                // Data laten zien ofzo
-//                while($Row = $Result->fetch_assoc()) {
-//                    echo 'Hier moet een nette weergave komen';
-//                }
-//            }
-//            $Connection->close();
+            //voert query uit
+            $Result = $Connection->query($Query);
+
+            if ($Result->num_rows > 0) {
+                // Loop through the results and display them
+                while ($row = $Result->fetch_assoc()) {
+                    echo "Test";
+                }
+            }
+            $Connection->close();
+
         ?>
     </body>
 

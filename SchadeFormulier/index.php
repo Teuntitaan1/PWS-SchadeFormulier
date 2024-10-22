@@ -1,7 +1,7 @@
 <!-- Vage pokkenzooi -->
 <?php
 ob_start();
-include "../Shared_Vars.php";
+include "./Shared_Vars.php";
 ?>
 
 <!DOCTYPE html>

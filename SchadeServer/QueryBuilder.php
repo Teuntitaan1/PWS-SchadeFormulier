@@ -1,44 +1,52 @@
 <?php
 function BuildQuery($Keywords, $Date, $ToiletID, $Origin, $Validity) : string {
-    // Lege query die opgevult wordt
+    // Lege querylist die opgevuld wordt met queries, hier wordt doorheengeloopt en geappendeerd tot de $Query string die uiteindelijk geretourneerd wordt.
+    $QueryList = [];
     $Query = "SELECT * FROM `SchadeServer`";
-    // Keywords om op te filteren, als er keywords zijn, voeg ze toe, anders niet
-    $Keywords = explode(",", $Keywords);
-    if($Keywords[0] != "") {
-        for ($x = 0; $x < count($Keywords); $x++) {
-            $Query .= " WHERE 'Beschrijving' LIKE '%".$Keywords[$x]."'%";
-            if (isset($Keywords[$x + 1])) {
-                $Query .= " OR";
+
+    if ($Keywords != null && $Date != null && $ToiletID != null && $Origin != null && $Validity != null) {
+        // Keywords om op te filteren, als er keywords zijn, voeg ze toe, anders niet
+        $Keywords = explode(",", $Keywords);
+        if($Keywords[0] != "") {
+            $KeywordPart = "";
+            for ($x = 0; $x < count($Keywords); $x++) {
+                $KeywordPart.= " `Beschrijving` LIKE '%".$Keywords[$x]."%'";
+                if (isset($Keywords[$x + 1])) {
+                    $KeywordPart .= " OR";
+                }
+            }
+            $QueryList[0] = $KeywordPart;
+        }
+        // pas $Date aan.
+        $DatePart = match ($Date) { // format("m/d/y H:i:s");
+            "PastHour" =>  "'".(new DateTime())->sub(new DateInterval("PT1H"))->format("m/d/y H:i:s")."'",
+            "PastDay" =>   "'".(new DateTime())->sub(new DateInterval("P1D"))->format("m/d/y H:i:s")."'",
+            "PastWeek" =>  "'".(new DateTime())->sub(new DateInterval("P1W"))->format("m/d/y H:i:s")."'",
+            "PastMonth" => "'".(new DateTime())->sub(new DateInterval("P1M"))->format("m/d/y H:i:s")."'",
+            "PastYear" =>  "'".(new DateTime())->sub(new DateInterval("P1Y"))->format("m/d/y H:i:s")."'",
+            default => "",
+            // Mist aanpasbare periode
+        };
+
+        // De simpele filters
+        if ($DatePart != "") { $QueryList[1] = "`Datum` < $DatePart"; } else { $QueryList[1] = ""; }
+        if ($ToiletID != "All") { $QueryList[2] = "`ToiletID` = '".$ToiletID."'"; } else { $QueryList[2] = ""; }
+        if ($Origin != "All") { $QueryList[3] = "`Origin` = '".$Origin."'"; } else { $QueryList[3] = ""; }
+        if ($Validity != "All") { $QueryList[4] = "`Validity` = '".$Validity."'"; } else { $QueryList[4] = ""; }
+
+        // Kut kut query appender ik haat mijn leven, telt de hoeveelheid niet lege queries, als die > 0 zijn dan moet de query opgebouwd worden
+        if (count(array_filter($QueryList, fn($Query) => $Query !== "")) > 0) {
+            $Query .= " WHERE ";
+            for ($x = 0; $x < count($QueryList); $x++) {
+                if ($QueryList[$x] != "") {
+                    $Query.= $QueryList[$x];
+
+                    if ($QueryList[$x + 1] != "") {
+                        $Query .= " AND ";
+                    }
+                }
             }
         }
     }
-
-    // format("m/d/y H:i:s");
-    $CurrentDate = new DateTime();
-    // pas $Date aan aan de juiste filter, voorbeeld: 2024-10-21 16-1:04:2 dus 2024-10-21 16-1:04:2
-    $DatePart = match ($Date) {
-        "PastHour" => $CurrentDate->sub(new DateInterval("PT1H"))->format("m/d/y H:i:s"),
-        "PastDay" => $CurrentDate->sub(new DateInterval("P1D"))->format("m/d/y H:i:s"),
-        "PastWeek" => $CurrentDate->sub(new DateInterval("P1W"))->format("m/d/y H:i:s"),
-        "PastMonth" => $CurrentDate->sub(new DateInterval("P1M"))->format("m/d/y H:i:s"),
-        "PastYear" => $CurrentDate->sub(new DateInterval("P1Y"))->format("m/d/y H:i:s"),
-        default => "",
-    };
-    if ($DatePart != "") {
-        $Query .= " AND ";
-        $Query .= "'Datum' > $DatePart AND ";
-    }
-    if ($ToiletID != "All") {
-        $Query .= "'ToiletID' = '".$ToiletID."' AND ";
-    }
-    if($Origin != "All") {
-        $Query .= "'Origin' = '".$Origin."' AND ";
-    }
-    if ($Validity != "All") {
-        $Query .= "'Validity' = '".$Validity."' AND ";
-    }
-    // TODO op basis van de andere filters moeten er queries gebouwd worden, deze moeten dan toegepast worden en alles moet laten zien worden, alle niet aangepaste filters kunnen zo de query in.
-    $Query = rtrim($Query, " AND");
-    $Query .= " ORDER by 'Datum' DESC';";
-    return $Query;
+    return $Query . " ORDER by `Datum` DESC;";
 }
