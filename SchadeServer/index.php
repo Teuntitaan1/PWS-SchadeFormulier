@@ -1,14 +1,14 @@
-<?php
-    require __DIR__ . '/Shared_Vars.php';
-    require __DIR__ . '/QueryBuilder.php';
-?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <title>Schadesysteem-Overzicht</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
+    <?php
+        require __DIR__ . '/Shared_Vars.php';
+        require __DIR__ . '/QueryBuilder.php';
+    ?>
 
     <body>
         <!--Filter form, hieronder staat de data-->
@@ -30,8 +30,8 @@
             <select id="ToiletID" name="ToiletID">
                 <option value="All">Alle</option>
                 <?php
-                if (isset($ToiletList)) {
-                    foreach($ToiletList as $ID => $ToiletID)
+                if (isset($GLOBALS["ToiletList"])) {
+                    foreach($GLOBALS["ToiletList"] as $ID => $ToiletID)
                     { echo "<option value='$ID'>$ToiletID</option>"; }
                 }
                 ?>
@@ -57,23 +57,34 @@
 
 
         <?php
-            // SQL Connectie
-            $Connection = new mysqli("localhost", "39506", "Bte0k", "db_39506");
-            if($Connection->connect_error) { die("Connection Failed" . $Connection->connect_error); }
+            // Non-valide url check
+            if (($_GET["Date"] != null) && ($_GET["ToiletID"] != null) && ($_GET["Origin"] != null) && ($_GET["Validity"] != null)) {
+                // SQL Connectie
+                $Connection = new mysqli("localhost", "39506", "Bte0k", "db_39506");
+                if($Connection->connect_error) { die("Connection Failed" . $Connection->connect_error); }
 
-            // bouwt de query op op basis van de filters
-            $Query = BuildQuery($_GET["Keyword"], $_GET["Date"], $_GET["ToiletID"],$_GET["Origin"], $_GET["Validity"]);
-            echo $Query;
-            //voert query uit
-            $Result = $Connection->query($Query);
-
-            if ($Result->num_rows > 0) {
-                // Loop through the results and display them
-                while ($row = $Result->fetch_assoc()) {
-                    echo "Test";
+                // bouwt de query op op basis van de filters
+                $Query = BuildQuery($_GET["Keyword"], $_GET["Date"], $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"]);
+                echo $Query;
+                //voert query uit
+                $Result = $Connection->query($Query);
+                if ($Result) {
+                    // Loop through the results and display them
+                    while ($Row = $Result->fetch_assoc()) {
+                        // TODO dit moet een nette tabel worden.
+                        echo $Row["Beschrijving"];
+                    }
                 }
+                else {
+                    echo "Geen data gevonden!";
+                }
+                $Connection->close();
             }
-            $Connection->close();
+            else {
+                // Terug naar een wel valide header
+                header("Location: index.php?Keyword=&Date=Always&ToiletID=All&Origin=All&Validity=All");
+            }
+
 
         ?>
     </body>
