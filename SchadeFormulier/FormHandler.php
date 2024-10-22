@@ -18,11 +18,11 @@ if (isset($_POST['Send'])) {
     // Query die de data verwerkt.
     $Connection->query(" INSERT INTO `SchadeServer` (`ToiletID`, `Soort`, `Betrouwbaarheid`, `Beschrijving`, `Bewijs`, `BestandType`) 
                 VALUES ('".$_POST["ToiletID"]."', 'Formulier', 'Eerlijk', '".$_POST["Description"]."', $EvidenceData, $EvidenceType);");
-    // Verzend de query en stuur de leerling terug naar index.php
+    // Verzend de query en stuur de leerling terug naar ertg.php
     $Connection->close();
     header("location: ./index.php?ToiletID=".$_POST["ToiletID"]."&Done=True");
 }
-// Terug naar index.php
-else { header("location: index.php"); }
+// Terug naar ertg.php
+else { header("location: ./index.php"); }
 // Klaar.
 exit();

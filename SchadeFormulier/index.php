@@ -32,7 +32,7 @@ include "../Shared_Vars.php";
             <input type="submit" name="Send" value="Verstuur" <?php if ($Done) {echo "disabled";} ?>>
         </form>
 
-        <?php if ($Done) {echo "<p>Bedankt voor het invullen :) We gaan meteen aan de bak! Nog een schadeformulier invullen? Klik <a href='index.php?ToiletID=$ToiletID&Done=False'>Hier</a>.</p>";} ?>
+        <?php if ($Done) {echo "<p>Bedankt voor het invullen :) We gaan meteen aan de bak! Nog een schadeformulier invullen? Klik <a href='./index.php?ToiletID=$ToiletID&Done=False'>Hier</a>.</p>";} ?>
 
     </body>
 

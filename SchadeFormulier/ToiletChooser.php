@@ -14,7 +14,7 @@
     <?php
         if (isset($ToiletList)) {
             foreach($ToiletList as $ID => $ToiletID)
-            { echo "<li><a href='index.php?ToiletID=$ID&Done=False'>$ToiletID</a></li>"; }
+            { echo "<li><a href='./index.php?ToiletID=$ID&Done=False'>$ToiletID</a></li>"; }
         }
         ?>
     </ul>
