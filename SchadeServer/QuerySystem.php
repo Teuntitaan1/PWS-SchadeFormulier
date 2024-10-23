@@ -3,7 +3,6 @@
 function BuildQuery($Keywords, $Date, $ToiletID, $Origin, $Validity) : string {
     // Lege querylist die opgevuld wordt met queries, hier wordt doorheengeloopt en geappendeerd tot de $Query string die uiteindelijk geretourneerd wordt.
     $QueryList = [];
-    $Query = "SELECT * FROM `SchadeServer`";
     // Keywords om op te filteren, als er keywords zijn, voeg ze toe, anders niet
     $Keywords = explode(",", $Keywords);
     if($Keywords[0] != "") {
@@ -40,6 +39,8 @@ function BuildQuery($Keywords, $Date, $ToiletID, $Origin, $Validity) : string {
     if ($Validity != "All") { $QueryList[4] = "`Betrouwbaarheid` = '$Validity'"; } else { $QueryList[4] = ""; }
 
     // Kut kut query appender ik haat mijn leven, telt de hoeveelheid niet lege queries, als die > 0 zijn dan moet de query opgebouwd worden
+    // Basis query
+    $Query = "SELECT * FROM `SchadeServer`";
     $AmountOfAND = count(array_filter($QueryList, fn($Query) => $Query !== ""));
     $NotEmptyQuery = $AmountOfAND > 0;
     if ($NotEmptyQuery) {
