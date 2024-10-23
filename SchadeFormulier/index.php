@@ -16,7 +16,7 @@ require "./Shared_Vars.php";
             if (!(ValidateToiletID($_GET["ToiletID"]))) {header("location: ToiletChooser.php"); exit();} $ToiletID = $_GET["ToiletID"];
             if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;}
         ?>
-        <h1>Schadeformulier <?php if(isset($ToiletList)) {echo $ToiletList[$ToiletID];} ?></h1>
+        <h1>Schadeformulier <?php echo $ToiletList[$ToiletID]; ?></h1>
         <?php if(!$Done) {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
 
         <!--Evidence form-->

@@ -12,11 +12,9 @@ $ToiletList = [
 ];
 
 function ValidateToiletID($ID): bool {
-    // Stomme null check maar moet wel
-    if (isset($ToiletList)) {
-        if ($ID != null) {
-            if ($ToiletList[$ID] != null) { return true; }
-        }
+    if ($ID != null) {
+        if ($ToiletList[$ID] != null) { return true; }
     }
+
     return false;
 }

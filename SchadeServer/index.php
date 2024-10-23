@@ -16,7 +16,7 @@
 
     <body>
         <!--Filter form, hieronder staat de data-->
-        <form action="index.php" method="get">
+        <form action="./index.php" method="get">
             <label for="Keyword">Sleutelwoorden</label>
             <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif">
 
@@ -34,10 +34,8 @@
             <select id="ToiletID" name="ToiletID">
                 <option value="All">Alle</option>
                 <?php
-                if (isset($ToiletList)) {
                     foreach($ToiletList as $ID => $ToiletID)
                     { echo "<option value='$ID'>$ToiletID</option>"; }
-                }
                 ?>
             </select>
 
@@ -59,14 +57,35 @@
             <input type="submit" value="Filter">
         </form>
 
-        <?php
-            // bouwt de query op op basis van de filters
-            $Result = QueryExecuter(BuildQuery($_GET["Keyword"], $_GET["Date"], $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"]));
-            //voert query uit
-            foreach ($Result as $Value) {
-                echo $Value;
-            }
-        ?>
+        <div>
+            <?php
+                $Query = BuildQuery($_GET["Keyword"], $_GET["Date"], $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"]);
+                // bouwt de query op op basis van de filters
+                $Result = QueryExecuter($Query);
+                //voert query uit
+                foreach ($Result as $Value) {
+                    echo "<div>";
+                        echo "
+                        <p>Datum: ".$Value["Datum"]."</p>
+                        <p>Toilet: ".$ToiletList[$Value["ToiletID"]]."</p>
+                        <p>Bron: ".$Value["Soort"]."</p>
+                        <p>Omschrijving: ".$Value["Beschrijving"]."</p>
+                        <p>Betrouwbaarheid: ".$Value["Betrouwbaarheid"]."</p>
+                        ";
+                    if ($Value["BestandType"] != null) {
+                        if ($Value["BestandType"] == "image/jpeg") {
+                            echo "<p>Bewijs:</p>";
+                            echo '<img src="data:'.$Value["BestandType"].';base64,'.$Value['Bewijs'].'"/>';
+                        }
+                        else if ($Value["BestandType"] == "video/") {
+                            //TODO video zooi implementeren
+                        }
+                    }
+                    echo "</div>";
+
+                }
+            ?>
+        </div>
     </body>
 </html>
 
