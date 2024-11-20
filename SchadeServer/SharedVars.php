@@ -15,6 +15,5 @@ function ValidateToiletID($ID): bool {
     if ($ID != null) {
         if ($ToiletList[$ID] != null) { return true; }
     }
-
     return false;
 }

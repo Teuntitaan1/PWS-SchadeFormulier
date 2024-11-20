@@ -10,7 +10,7 @@
         if (!(($_GET["Date"] != null) && ($_GET["ToiletID"] != null) && ($_GET["Origin"] != null) && ($_GET["Validity"] != null))) { header("Location: index.php?Keyword=&Date=PastDay&ToiletID=All&Origin=All&Validity=All");}
         ini_set('display_errors', 1); // kan weggecomment worden
         // Belangrijke bestanden
-        require __DIR__ . '/Shared_Vars.php'; // ToiletID list
+        require __DIR__ . '/SharedVars.php'; // ToiletID list
         require __DIR__ . '/QuerySystem.php'; // SQL query builder en verbeteraar
     ?>
 

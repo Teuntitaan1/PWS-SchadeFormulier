@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <?php require "./Shared_Vars.php" ?>
+    <?php require "./SharedVars.php" ?>
     <h1>Schadeformulier ...</h1>
     <h3>Kies je toilet:</h3>
 

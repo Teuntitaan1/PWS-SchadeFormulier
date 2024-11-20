@@ -1,7 +1,7 @@
 <!-- Vage pokkenzooi -->
 <?php
 ob_start();
-require "./Shared_Vars.php";
+require "./SharedVars.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,11 +13,10 @@ require "./Shared_Vars.php";
 
     <body>
         <?php
-            if (!(ValidateToiletID($_GET["ToiletID"]))) {header("location: ToiletChooser.php"); exit();} $ToiletID = $_GET["ToiletID"];
-            if ($_GET["Done"] != "True") {$Done = false;} else {$Done = true;}
+            if (!(ValidateToiletID($_GET["ToiletID"]))) { header("location: ToiletChooser.php"); exit(); }
         ?>
         <h1>Schadeformulier <?php echo $ToiletList[$ToiletID]; ?></h1>
-        <?php if(!$Done) {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
+        <?php if($_GET["Done"] != "True") {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
 
         <!--Evidence form-->
         <form action="./FormHandler.php" method="post" enctype="multipart/form-data">
@@ -29,10 +28,10 @@ require "./Shared_Vars.php";
 
             <input type="file" name="Evidence" accept="image/jpeg">
 
-            <input type="submit" name="Send" value="Verstuur" <?php if ($Done) {echo "disabled";} ?>>
+            <input type="submit" name="Send" value="Verstuur" <?php if ($_GET["Done"] == "True") {echo "disabled";} ?>>
         </form>
 
-        <?php if ($Done) {echo "<p>Bedankt voor het invullen :) We gaan meteen aan de bak! Nog een schadeformulier invullen? Klik <a href='./index.php?ToiletID=$ToiletID&Done=False'>Hier</a>.</p>";} ?>
+        <?php if ($_GET["Done"] == "True") {echo `<p>Bedankt voor het invullen :) We gaan meteen aan de bak! Nog een schadeformulier invullen? Klik <a href='./index.php?ToiletID=`.$_GET["ToiletID"].`&Done=False'>Hier</a>.</p>`;} ?>
 
     </body>
 
