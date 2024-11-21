@@ -1,17 +1,19 @@
+<!--TODO, gebruiksvriendelijker maken door keuzes op te slaan-->
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <title>Schadesysteem-Overzicht</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="script.js"></script>
 </head>
 
     <?php
+        require __DIR__ . '/QuerySystem.php'; // SQL query builder en verbeteraar
+        require __DIR__ . '/SharedVars.php'; // SQL query builder en verbeteraar
         // Non-valide url check
         if (!(($_GET["Date"] != null) && ($_GET["ToiletID"] != null) && ($_GET["Origin"] != null) && ($_GET["Validity"] != null))) { header("Location: index.php?Keyword=&Date=PastDay&ToiletID=All&Origin=All&Validity=All");}
         ini_set('display_errors', 1); // kan weggecomment worden
-        // Belangrijke bestanden
-        require __DIR__ . '/SharedVars.php'; // ToiletID list
-        require __DIR__ . '/QuerySystem.php'; // SQL query builder en verbeteraar
     ?>
 
     <body>
@@ -57,7 +59,7 @@
             <input type="submit" value="Filter">
         </form>
 
-        <div>
+        <div class="collapsable">
             <?php
                 $Query = BuildQuery($_GET["Keyword"], $_GET["Date"], $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"]);
                 // bouwt de query op op basis van de filters
@@ -73,11 +75,11 @@
                         <p>Betrouwbaarheid: ".$Value["Betrouwbaarheid"]."</p>
                         ";
                     if ($Value["BestandType"] != null) {
-                        if ($Value["BestandType"] == "image/jpeg") {
+                        if (preg_match('#image/#', $Value["BestandType"])) {
                             echo "<p>Bewijs:</p>";
                             echo '<img src="data:'.$Value["BestandType"].';base64,'.$Value['Bewijs'].'"/>';
                         }
-                        else if ($Value["BestandType"] == "video/") {
+                        else if (preg_match('#video#', $Value["BestandType"])) {
                             //TODO video zooi implementeren
                         }
                     }
