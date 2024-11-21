@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <?php require __DIR__ . '/SharedVars.php'; // ToiletID list ?>
+    <?php require  dirname(__DIR__, 1). '/Shared.php'; // ToiletID list ?>
     <h1>Schadeformulier ...</h1>
     <h3>Kies je toilet:</h3>
 

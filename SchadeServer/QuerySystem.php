@@ -63,10 +63,6 @@ function BuildQuery($Keywords, $Date, $ToiletID, $Origin, $Validity) : string {
 
 // Voert de query uit, en returned de resultaten.
 function QueryExecuter($Query) : array {
-    // SQL Connectie
-    $Connection = new mysqli("localhost", "39506", "Bte0k", "db_39506");
-    if($Connection->connect_error) { die("Connection Failed" . $Connection->connect_error);}
-
     // query uitvoeren en data ophalen
     $Result = $Connection->query($Query)->fetch_all(MYSQLI_ASSOC);
     if (count($Result) > 0) {

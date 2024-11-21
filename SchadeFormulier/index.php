@@ -1,9 +1,3 @@
-<!-- Vage pokkenzooi -->
-<?php
-ob_start();
-require __DIR__ . '/SharedVars.php'; // ToiletID list
-?>
-
 <!DOCTYPE html>
 <html lang="nl">
     <head>
@@ -13,6 +7,8 @@ require __DIR__ . '/SharedVars.php'; // ToiletID list
 
     <body>
         <?php
+            require  dirname(__DIR__, 1).'/Shared.php';
+
             if (!(ValidToiletID($_GET["ToiletID"]))) { header("location: ToiletChooser.php"); exit(); }
         ?>
         <h1>Schadeformulier <?php echo $ToiletList[$_GET["ToiletID"]]; ?></h1>
@@ -35,6 +31,3 @@ require __DIR__ . '/SharedVars.php'; // ToiletID list
     </body>
 
 </html>
-
-<!-- Meer vage pokkenzooi -->
-<?php ob_end_flush(); ?>

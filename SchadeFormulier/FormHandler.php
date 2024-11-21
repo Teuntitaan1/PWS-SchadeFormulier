@@ -1,23 +1,24 @@
 <?php
+// UUID Generator
+require dirname(__DIR__, 1).'/Shared.php';
+
 // Form data ontvangen? Verstuur form
 if (isset($_POST['Send'])) {
-    // SQL Connectie
-    $Connection = new mysqli("localhost", "39506", "Bte0k", "db_39506");
-    if($Connection->connect_error) {die("Connection Failed" . $Connection->connect_error);}
-    
     // Is er een bestand verstuurd?
     if (!($_FILES['Evidence'] == null)) {
-        // leest het bestand uit, encrypt hem naar een Binary large object blebber
-        $EvidenceData = "'".base64_encode(file_get_contents($_FILES['Evidence']['tmp_name']))."'";
-        // bestandstype, kan video zijn bij de sensor
-        $EvidenceType = "'".$_FILES["Evidence"]["type"]."'";
+        // Directory waar hij de bestanden opslaat
+        $FileDir = dirname(__DIR__, 1)."/Files/";
+        // Random gegeneneerde naam + extensie
+        $EvidenceName = GenerateUUID().".".pathinfo($_FILES["Evidence"]["name"],PATHINFO_EXTENSION);
+        // Beweeg bestand de goede kant op
+        move_uploaded_file($_FILES["Evidence"]["tmp_name"], $FileDir.$EvidenceName);
     }
     // Zo niet, dan stel je de data in op NULL
-    else { $EvidenceType = $EvidenceData = "NULL"; }
+    else { $EvidenceName = "NULL"; }
 
     // Query die de data verwerkt.
-    $Connection->query(" INSERT INTO `SchadeServer` (`ToiletID`, `Soort`, `Betrouwbaarheid`, `Beschrijving`, `Bewijs`, `BestandType`) 
-                VALUES ('".$_POST["ToiletID"]."', 'Formulier', 'Eerlijk', '".$_POST["Description"]."', $EvidenceData, $EvidenceType);");
+    $Connection->query(" INSERT INTO `SchadeServer` (`ToiletID`, `Soort`, `Betrouwbaarheid`, `Beschrijving`, `BewijsNaam`) 
+                VALUES ('".$_POST["ToiletID"]."', 'Formulier', 'Eerlijk', '".$_POST["Description"]."', '$EvidenceName');");
     // Verzend de query en stuur de leerling terug naar index.php
     $Connection->close();
     header("location: ./index.php?ToiletID=".$_POST["ToiletID"]."&Done=True");
