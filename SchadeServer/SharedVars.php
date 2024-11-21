@@ -11,7 +11,8 @@ $ToiletList = [
     "0G" => "genderneutraal toilet",
 ];
 
-function ValidateToiletID($ID): bool {
+function ValidToiletID($ID): bool {
+    global $ToiletList;
     if ($ID != null) {
         if ($ToiletList[$ID] != null) { return true; }
     }

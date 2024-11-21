@@ -13,7 +13,7 @@ require "./SharedVars.php";
 
     <body>
         <?php
-            if (!(ValidateToiletID($_GET["ToiletID"]))) { header("location: ToiletChooser.php"); exit(); }
+            if (!(ValidToiletID($_GET["ToiletID"]))) { header("location: ToiletChooser.php"); exit(); }
         ?>
         <h1>Schadeformulier <?php echo $ToiletList[$ToiletID]; ?></h1>
         <?php if($_GET["Done"] != "True") {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
