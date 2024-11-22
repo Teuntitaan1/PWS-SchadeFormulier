@@ -16,15 +16,16 @@
     ?>
 
     <body>
+        <?php echo $_GET["Keyword"]; ?>
         <!--Filter form, hieronder staat de data -->
         <form action="./index.php" method="get">
             <label for="Keyword">Sleutelwoorden</label>
-            <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value=<?php echo $_GET["Keyword"];?>>
+            <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"]?>'>
 
             <label for="Date">Geschiedenis</label>
             <select id="Date" name="Date">
                 <option value="PastHour" <?php if($_GET["Date"] == "PastHour"){echo "selected";}?>>In het afgelopen uur</option>
-                <option value="PastDay" <?php if($_GET["Date"] == "PastWeek"){echo "selected";}?>>Vandaag</option>
+                <option value="PastDay" <?php if($_GET["Date"] == "PastDay"){echo "selected";}?>>Vandaag</option>
                 <option value="PastWeek" <?php if($_GET["Date"] == "PastWeek"){echo "selected";}?>>Deze week</option>
                 <option value="PastMonth" <?php if($_GET["Date"] == "PastMonth"){echo "selected";}?>>Deze maand</option>
                 <option value="PastYear" <?php if($_GET["Date"] == "PastYear"){echo "selected";}?>>Dit jaar</option>
@@ -33,11 +34,15 @@
 
             <label for="ToiletID">Toilet</label>
             <select id="ToiletID" name="ToiletID">
-                <option value="All">Alle</option>
+                <option value="All" <?php if($_GET["ToiletID"] == "All"){echo "selected";}?>>Alle</option>
                 <?php
                     foreach($ToiletList as $ID => $ToiletID) { 
-                        if($_GET["ToiletID"] == $ID){ echo "<option value='$ID'>$ToiletID</option>";}
-                        else { echo "<option value='$ID' selected>$ToiletID</option>";}
+                        if($_GET["ToiletID"] == $ID) {
+                            echo "<option value='$ID' selected>$ToiletID</option>";
+                        }
+                        else {
+                            echo "<option value='$ID'>$ToiletID</option>"; 
+                        }
                     }
                 ?>
             </select>
