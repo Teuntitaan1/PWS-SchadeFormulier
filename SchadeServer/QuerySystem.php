@@ -64,6 +64,7 @@ function BuildQuery($Keywords, $Date, $ToiletID, $Origin, $Validity) : string {
 // Voert de query uit, en returned de resultaten.
 function QueryExecuter($Query) : array {
     // query uitvoeren en data ophalen
+    global $Connection;
     $Result = $Connection->query($Query)->fetch_all(MYSQLI_ASSOC);
     if (count($Result) > 0) {
         return $Result;
