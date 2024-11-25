@@ -5,21 +5,12 @@
 <head>
     <title>Schadesysteem-Overzicht-Verbeterd</title>
     <script src="./script.js"></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
     <?php
-        $ToiletList = [
-            "0M" => "mannentoilet begane grond",
-            "0F" => "vrouwentoilet begane grond",
-            "1M" => "mannentoilet 1e verdieping",
-            "1F" => "vrouwentoilet 1e verdieping",
-            "2M" => "mannentoilet 2e verdieping",
-            "2F" => "vrouwentoilet 2e verdieping",
-            "3M" => "mannentoilet 3e verdieping",
-            "3F" => "vrouwentoilet 3e verdieping",
-            "0G" => "genderneutraal toilet",
-        ];
-
+        require __DIR__ . '/QuerySystem.php'; // SQL query builder en verbeteraar
+        require __DIR__ . '/Shared.php'; // SQL query builder en verbeteraar
         ini_set('display_errors', 1); // kan weggecomment worden
     ?>
 
@@ -27,7 +18,7 @@
         <!--Filter form, hieronder staat de data TODO, form reworken tot een gebruiksvriendelijker systeem-->
         <form action="./index.php" method="get">
             <label for="Keyword">Sleutelwoorden</label>
-            <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"]?>'>
+            <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value=''>
             <div id="DateDiv">
                 <label for="Date">Geschiedenis</label>
                 <select id="Date" name="Date" onchange="DateChange()">
@@ -40,11 +31,10 @@
                     <option value="Custom">Aangepast..</option>
                 </select>
                 <div id="CustomDateDiv" class="Collapsed">
-                    <!--Hier verbeteren-->
                     <label for="Begin">Begin</label>
-                    <input type="date" id="Begin" name="Start">
+                    <input type="date" id="Begin" name="Start"/>
                     <label for="Eind">Eind</label>
-                    <input type="date" id="Eind" name="End">
+                    <input type="date" id="Eind" name="End"/>
                 </div>
             </div>
 
@@ -57,33 +47,30 @@
                 <div id="IDDiv" class="Collapsed">
                     <?php
                     foreach($ToiletList as $ID => $ToiletID) {
-                        echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]'/>";
+                        echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]' checked/>";
                     }
                     ?>
                 </div>
             </div>
 
             <div id="OriginDiv">
-                <label for="Sensor">Sensor</label><input type="checkbox" id="Sensor" name="Origin[]"/>
-                <label for="Formulier">Formulier</label><input type="checkbox" id="Formulier" name="Origin[]"/>
+                <label for="Sensor">Sensor</label><input type="checkbox" id="Sensor" name="Origin[]" value="Sensor" checked/>
+                <label for="Formulier">Formulier</label><input type="checkbox" id="Formulier" name="Origin[]" value="Formulier" checked/>
             </div>
 
             <div id="ValidityDiv">
-                <label for="Betrouwbaar">Betrouwbaar</label><input type="checkbox" id="Betrouwbaar" name="Validity[]"/>
-                <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]"/>
-                <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]"/>
+                <label for="Betrouwbaar">Betrouwbaar</label><input type="checkbox" id="Betrouwbaar" name="Validity[]" value="Betrouwbaar" checked/>
+                <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" checked/>
+                <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]" value="Onbetrouwbaar" checked/>
             </div>
             <input type="submit" value="Filter">
         </form>
-
+        <div id="Results">
+            <?php
+            $Query = BuildQuery($_GET["Keyword"], array($_GET["Date"], $_GET["Start"], $_GET["End"]), $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"]);
+            // bouwt de query op op basis van de filters
+            echo $Query;
+            ?>
+        </div>
     </body>
 </html>
-
-<style>
-.Collapsed {
-    display: none;
-}
-.Extended {
-    display: block;
-}
-</style>
