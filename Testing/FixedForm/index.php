@@ -8,14 +8,22 @@
 </head>
 
     <?php
-        require dirname(__DIR__, 2). '/Shared.php'; // SQL query builder en verbeteraar
-        // Non-valide url check
-        if (!(($_GET["Date"] != null) && ($_GET["ToiletID"] != null) && ($_GET["Origin"] != null) && ($_GET["Validity"] != null))) { header("Location: index.php?Keyword=&Date=PastDay&ToiletID=All&Origin=All&Validity=All");}
+        $ToiletList = [
+            "0M" => "mannentoilet begane grond",
+            "0F" => "vrouwentoilet begane grond",
+            "1M" => "mannentoilet 1e verdieping",
+            "1F" => "vrouwentoilet 1e verdieping",
+            "2M" => "mannentoilet 2e verdieping",
+            "2F" => "vrouwentoilet 2e verdieping",
+            "3M" => "mannentoilet 3e verdieping",
+            "3F" => "vrouwentoilet 3e verdieping",
+            "0G" => "genderneutraal toilet",
+        ];
+
         ini_set('display_errors', 1); // kan weggecomment worden
     ?>
 
     <body>
-        <?php echo $_GET["Keyword"]; ?>
         <!--Filter form, hieronder staat de data TODO, form reworken tot een gebruiksvriendelijker systeem-->
         <form action="./index.php" method="get">
             <label for="Keyword">Sleutelwoorden</label>
@@ -31,7 +39,7 @@
                     <option value="Always" <?php if($_GET["Date"] == "Always"){echo "selected";}?>>Altijd</option>
                     <option value="Custom">Aangepast..</option>
                 </select>
-                <div id="CustomDiv" class="Collapsed">
+                <div id="CustomDateDiv" class="Collapsed">
                     <!--Hier verbeteren-->
                     <label for="Begin">Begin</label>
                     <input type="date" id="Begin" name="Start">
@@ -39,36 +47,32 @@
                     <input type="date" id="Eind" name="End">
                 </div>
             </div>
-            <label for="ToiletID">Toilet</label>
-            <select id="ToiletID" name="ToiletID" multiple>
-                <option value="All" <?php if($_GET["ToiletID"] == "All"){echo "selected";}?>>Alle</option>
-                <?php
-                    foreach($ToiletList as $ID => $ToiletID) { 
-                        if($_GET["ToiletID"] == $ID) {
-                            echo "<option value='$ID' selected>$ToiletID</option>";
-                        }
-                        else {
-                            echo "<option value='$ID'>$ToiletID</option>"; 
-                        }
+
+            <div id="ToiletIDDiv">
+                <label for="ToiletID">Toilet</label>
+                <select id="ToiletID" name="ToiletID[]" onchange="ToiletIDChange()">
+                    <option value="All">Alle</option>
+                    <option value="Custom">Anders...</option>
+                </select>
+                <div id="IDDiv" class="Collapsed">
+                    <?php
+                    foreach($ToiletList as $ID => $ToiletID) {
+                        echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]'/>";
                     }
-                ?>
-            </select>
+                    ?>
+                </div>
+            </div>
 
-            <label for="Origin">Bron</label>
-            <select id="Origin" name="Origin" multiple>
-                <option value="All" <?php if($_GET["Origin"] == "All"){echo "selected";}?>>Alle</option>
-                <option value="Sensor" <?php if($_GET["Origin"] == "Sensor"){echo "selected";}?>>Toilet-Sensor</option>
-                <option value="Formulier" <?php if($_GET["Origin"] == "Formulier"){echo "selected";}?>>Schadeformulier</option>
-            </select>
+            <div id="OriginDiv">
+                <label for="Sensor">Sensor</label><input type="checkbox" id="Sensor" name="Origin[]"/>
+                <label for="Formulier">Formulier</label><input type="checkbox" id="Formulier" name="Origin[]"/>
+            </div>
 
-            <label for="Validity">Betrouwbaarheid</label>
-            <select id="Validity" name="Validity" multiple>
-                <option value="All" <?php if($_GET["Validity"] == "All"){echo "selected";}?>>Alle</option>
-                <option value="Betrouwbaar" <?php if($_GET["Validity"] == "Betrouwbaar"){echo "selected";}?>>Betrouwbaar</option>
-                <option value="Eerlijk" <?php if($_GET["Validity"] == "Eerlijk"){echo "selected";}?>>Eerlijk</option>
-                <option value="Onbetrouwbaar" <?php if($_GET["Validity"] == "Onbetrouwbaar"){echo "selected";}?>>Onbetrouwbaar</option>
-            </select>
-
+            <div id="ValidityDiv">
+                <label for="Betrouwbaar">Betrouwbaar</label><input type="checkbox" id="Betrouwbaar" name="Validity[]"/>
+                <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]"/>
+                <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]"/>
+            </div>
             <input type="submit" value="Filter">
         </form>
 
@@ -76,8 +80,6 @@
 </html>
 
 <style>
-#CustomDiv {
-}
 .Collapsed {
     display: none;
 }
