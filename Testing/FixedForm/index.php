@@ -31,12 +31,12 @@
             <div id="DateDiv">
                 <label for="Date">Geschiedenis</label>
                 <select id="Date" name="Date" onchange="DateChange()">
-                    <option value="PastHour" <?php if($_GET["Date"] == "PastHour"){echo "selected";}?>>In het afgelopen uur</option>
-                    <option value="PastDay" <?php if($_GET["Date"] == "PastDay"){echo "selected";}?>>Vandaag</option>
-                    <option value="PastWeek" <?php if($_GET["Date"] == "PastWeek"){echo "selected";}?>>Deze week</option>
-                    <option value="PastMonth" <?php if($_GET["Date"] == "PastMonth"){echo "selected";}?>>Deze maand</option>
-                    <option value="PastYear" <?php if($_GET["Date"] == "PastYear"){echo "selected";}?>>Dit jaar</option>
-                    <option value="Always" <?php if($_GET["Date"] == "Always"){echo "selected";}?>>Altijd</option>
+                    <option value="PastHour">In het afgelopen uur</option>
+                    <option value="PastDay">Vandaag</option>
+                    <option value="PastWeek">Deze week</option>
+                    <option value="PastMonth">Deze maand</option>
+                    <option value="PastYear">Dit jaar</option>
+                    <option value="Always">Altijd</option>
                     <option value="Custom">Aangepast..</option>
                 </select>
                 <div id="CustomDateDiv" class="Collapsed">
