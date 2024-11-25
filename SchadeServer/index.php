@@ -17,7 +17,7 @@
 
     <body>
         <?php echo $_GET["Keyword"]; ?>
-        <!--Filter form, hieronder staat de data -->
+        <!--Filter form, hieronder staat de data TODO, form reworken tot een gebruiksvriendelijker systeem-->
         <form action="./index.php" method="get">
             <label for="Keyword">Sleutelwoorden</label>
             <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"]?>'>
