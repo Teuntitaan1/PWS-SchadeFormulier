@@ -1,4 +1,4 @@
-<!--TODO, keuzes ruimer-->
+<!--TODO, Header fixen-->
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -22,46 +22,51 @@
             <div id="DateDiv">
                 <label for="Date">Geschiedenis</label>
                 <select id="Date" name="Date" onchange="DateChange()">
-                    <option value="PastHour">In het afgelopen uur</option>
-                    <option value="PastDay">Vandaag</option>
-                    <option value="PastWeek">Deze week</option>
-                    <option value="PastMonth">Deze maand</option>
-                    <option value="PastYear">Dit jaar</option>
-                    <option value="Always">Altijd</option>
-                    <option value="Custom">Aangepast..</option>
+                    <option value="PastHour" <?php if($_GET["Date"] == "PastHour") {echo "selected";}?>>In het afgelopen uur</option>
+                    <option value="PastDay" <?php if($_GET["Date"] == "PastDay") {echo "selected";}?>>Vandaag</option>
+                    <option value="PastWeek" <?php if($_GET["Date"] == "PastWeek") {echo "selected";}?>>Deze week</option>
+                    <option value="PastMonth" <?php if($_GET["Date"] == "PastMonth") {echo "selected";}?>>Deze maand</option>
+                    <option value="PastYear" <?php if($_GET["Date"] == "PastYear") {echo "selected";}?>>Dit jaar</option>
+                    <option value="Always" <?php if($_GET["Date"] == "Always") {echo "selected";}?>>Altijd</option>
+                    <option value="Custom" <?php if($_GET["Date"] == "Custom") {echo "selected";}?>>Aangepast..</option>
                 </select>
                 <div id="CustomDateDiv" class="Collapsed">
                     <label for="Begin">Begin</label>
-                    <input type="date" id="Begin" name="Start"/>
+                    <input type="date" id="Begin" name="Start" value="<?php echo $_GET["Start"] ?>"/>
                     <label for="Eind">Eind</label>
-                    <input type="date" id="Eind" name="End"/>
+                    <input type="date" id="Eind" name="End"  value="<?php echo $_GET["End"] ?>"/>
                 </div>
             </div>
 
             <div id="ToiletIDDiv">
                 <label for="ToiletID">Toilet</label>
-                <select id="ToiletID" name="ToiletID[]" onchange="ToiletIDChange()">
-                    <option value="All">Alle</option>
-                    <option value="Custom">Anders...</option>
+                <select id="ToiletID" name="ToiletID[]" onchange="ToiletIDChange()" >
+                    <option value="All" <?php if(in_array("All", $_GET["ToiletID"])) {echo "selected";}?>>Alle</option>
+                    <option value="Custom" <?php if(in_array("Custom", $_GET["ToiletID"])) {echo "selected";}?>>Anders...</option>
                 </select>
                 <div id="IDDiv" class="Collapsed">
                     <?php
                     foreach($ToiletList as $ID => $ToiletID) {
-                        echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]' checked/>";
+                        if(in_array("Custom", $_GET["ToiletID"])) {
+                            echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]' checked/>";
+                        }
+                        else {
+                            echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]'/>";
+                        }
                     }
                     ?>
                 </div>
             </div>
 
             <div id="OriginDiv">
-                <label for="Sensor">Sensor</label><input type="checkbox" id="Sensor" name="Origin[]" value="Sensor" checked/>
-                <label for="Formulier">Formulier</label><input type="checkbox" id="Formulier" name="Origin[]" value="Formulier" checked/>
+                <label for="Sensor">Sensor</label><input type="checkbox" id="Sensor" name="Origin[]" value="Sensor" <?php if(in_array("Sensor", $_GET["Origin"])) {echo "checked";}?>/>
+                <label for="Formulier">Formulier</label><input type="checkbox" id="Formulier" name="Origin[]" value="Formulier" <?php if(in_array("Formulier", $_GET["Origin"])) {echo "checked";}?>/>
             </div>
 
             <div id="ValidityDiv">
-                <label for="Betrouwbaar">Betrouwbaar</label><input type="checkbox" id="Betrouwbaar" name="Validity[]" value="Betrouwbaar" checked/>
-                <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" checked/>
-                <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]" value="Onbetrouwbaar" checked/>
+                <label for="Betrouwbaar">Betrouwbaar</label><input type="checkbox" id="Betrouwbaar" name="Validity[]" value="Betrouwbaar" <?php if(in_array("Betrouwbaar", $_GET["Validity"])) {echo "checked";}?>/>
+                <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" <?php if(in_array("Eerlijk", $_GET["Validity"])) {echo "checked";}?>/>
+                <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]" value="Onbetrouwbaar" <?php if(in_array("Onbetrouwbaar", $_GET["Validity"])) {echo "checked";}?>/>
             </div>
             <input type="submit" value="Filter">
         </form>
