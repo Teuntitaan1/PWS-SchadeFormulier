@@ -11,14 +11,15 @@
         require dirname(__DIR__, 1). '/Shared.php'; // SQL query builder en verbeteraar
         ini_set('display_errors', 1); // kan weggecomment worden
         // Default query voor als de url ongeldig is
-        if (($_GET["Date"] == null) || ($_GET["ToiletID"] == null) || ($_GET["Origin"] == null) || ($_GET["Validity"] == null)) { header("Location: index.php?Keyword=&Date=PastDay&Start=&End=&ToiletID%5B%5D=All&ToiletID%5B%5D=0M&ToiletID%5B%5D=0F&ToiletID%5B%5D=1M&ToiletID%5B%5D=1F&ToiletID%5B%5D=2M&ToiletID%5B%5D=2F&ToiletID%5B%5D=3M&ToiletID%5B%5D=3F&ToiletID%5B%5D=0G&Origin%5B%5D=Sensor&Origin%5B%5D=Formulier&Validity%5B%5D=Betrouwbaar&Validity%5B%5D=Eerlijk&Validity%5B%5D=Onbetrouwbaar");}
+        if (($_GET["Date"] == null) || ($_GET["ToiletID"] == null) || ($_GET["Origin"] == null) || ($_GET["Validity"] == null)) { header("Location: index.php?Keyword=&Date=PastDay&Start=&End=&ToiletID%5B%5D=All&ToiletID%5B%5D=0M&ToiletID%5B%5D=0F&ToiletID%5B%5D=1M&ToiletID%5B%5D=1F&ToiletID%5B%5D=2M&ToiletID%5B%5D=2F&ToiletID%5B%5D=3M&ToiletID%5B%5D=3F&ToiletID%5B%5D=0G&Origin%5B%5D=Sensor&Origin%5B%5D=Formulier&Origin%5B%5D=1&Validity%5B%5D=Betrouwbaar&Validity%5B%5D=Eerlijk&Validity%5B%5D=Onbetrouwbaar&Validity%5B%5D=1
+");}
     ?>
 
     <body>
         <!--Filter form, hieronder staat de data TODO, form reworken tot een gebruiksvriendelijker systeem-->
         <form action="./index.php" method="get">
             <label for="Keyword">Sleutelwoorden</label>
-            <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value=''>
+            <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"];?>'>
             <div id="DateDiv">
                 <label for="Date">Geschiedenis</label>
                 <select id="Date" name="Date" onchange="DateChange()">
@@ -59,11 +60,13 @@
             </div>
 
             <div id="OriginDiv">
+                <input type="hidden" name="Origin[]" value="1"/>
                 <label for="Sensor">Sensor</label><input type="checkbox" id="Sensor" name="Origin[]" value="Sensor" <?php if(in_array("Sensor", $_GET["Origin"])) {echo "checked";}?>/>
                 <label for="Formulier">Formulier</label><input type="checkbox" id="Formulier" name="Origin[]" value="Formulier" <?php if(in_array("Formulier", $_GET["Origin"])) {echo "checked";}?>/>
             </div>
 
             <div id="ValidityDiv">
+                <input type="hidden" name="Validity[]" value="1"/>
                 <label for="Betrouwbaar">Betrouwbaar</label><input type="checkbox" id="Betrouwbaar" name="Validity[]" value="Betrouwbaar" <?php if(in_array("Betrouwbaar", $_GET["Validity"])) {echo "checked";}?>/>
                 <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" <?php if(in_array("Eerlijk", $_GET["Validity"])) {echo "checked";}?>/>
                 <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]" value="Onbetrouwbaar" <?php if(in_array("Onbetrouwbaar", $_GET["Validity"])) {echo "checked";}?>/>
@@ -73,6 +76,7 @@
         <div id="Results">
             <?php
                 $Query = BuildQuery($_GET["Keyword"], array($_GET["Date"], $_GET["Start"], $_GET["End"]), $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"]);
+                echo $Query;
                 // bouwt de query op op basis van de filters
                 $Result = QueryExecuter($Query);
                 //voert query uit

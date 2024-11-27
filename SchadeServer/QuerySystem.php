@@ -42,7 +42,7 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
 
     // custom Datum filter
     if ($DatePart != "") {
-        if($DatePart == "Custom") { $QueryList[1] = "`Datum` > '$DateArray[1]' AND `Datum` < '$DateArray[2]'";}
+        if($DatePart == "Custom") { $QueryList[1] = "(`Datum` > '$DateArray[1]' AND `Datum` < '$DateArray[2]')";}
         else { $QueryList[1] = "`Datum` > $DatePart"; }
     } else { $QueryList[1] = ""; }
 
@@ -57,22 +57,27 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
         if ($ToiletIDPart == "") {
             return "UnreachableQuery";
         }
-        $QueryList[2] = $ToiletIDPart;
+        $QueryList[2] = "(". $ToiletIDPart . ")";
     } else { $QueryList[2] = "";}
 
     // Bron filter
     $OriginPart = "";
-    for ($x = 0; $x < count($OriginArray); $x++) {
+    for ($x = 1; $x < count($OriginArray); $x++) {
         $OriginPart .= " `Soort` = '".$OriginArray[$x]."' OR ";
     }
-    $QueryList[3] = rtrim($OriginPart, "OR ");
+    $OriginPart = rtrim($OriginPart, "OR ");
+    if ($OriginPart != "") {$OriginPart = "(" .$OriginPart. ")";}
+    $QueryList[3] = $OriginPart;
 
     // Betrouwbaarheid filter
     $ValidityPart = "";
-    for ($x = 0; $x < count($ValidityArray); $x++) {
+    for ($x = 1; $x < count($ValidityArray); $x++) {
         $ValidityPart .= " `Betrouwbaarheid` = '".$ValidityArray[$x]."' OR ";
     }
-    $QueryList[4] = rtrim($ValidityPart, "OR ");
+    $ValidityPart = rtrim($ValidityPart, "OR ");
+    if ($ValidityPart != "") {$ValidityPart = "(" .$ValidityPart. ")";}
+    $QueryList[4] = $ValidityPart;
+
 
     // Kut kut grafjode query appender ik haat mijn leven, telt de hoeveelheid niet lege queries, als die > 0 zijn dan moet de query opgebouwd worden
     // Basis query
@@ -99,6 +104,7 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
 
 // Voert de query uit, en returned de resultaten.
 function QueryExecuter($Query) : array {
+    if ($Query == "UnreachableQuery") {return [];}
     // query uitvoeren en data ophalen
     global $Connection;
     $Result = $Connection->query($Query)->fetch_all(MYSQLI_ASSOC);
