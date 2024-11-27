@@ -1,11 +1,10 @@
 <?php
 // Functie die op basis van de filters meegegeven vanuit de schadeserver een query returned die weer uitgevoerd kan worden.
-function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $ValidityArray) : string {
+function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $ValidityArray, $SortArray) : string {
     // Null checks
-    if ($ValidityArray == array("1") || $OriginArray == array("1")) { return "OnreachableQuery"; }
+    if ($ValidityArray == array("1") || $OriginArray == array("1")) { return "UnreachableQuery"; }
     if ($DateArray[1] == null) { $DateArray[1] = (new DateTime())->sub(new DateInterval("PT1H"))->format("o-m-d H:i:s"); }
     if ($DateArray[2] == null) { $DateArray[2] = (new DateTime())->sub(new DateInterval("P1Y"))->format("o-m-d H:i:s"); }
-
 
     // Lege querylist die opgevuld wordt met queries, hier wordt doorheengeloopt en geappendeerd tot de $Query string die uiteindelijk geretourneerd wordt.
     $QueryList = [];
@@ -24,20 +23,14 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
     }
     // pas $Date aan., Datearray bestaat uit (Optie, Begindatum, Einddatum)
     switch ($DateArray[0]) {
-        case "PastHour":
-            $DatePart = "'".(new DateTime())->sub(new DateInterval("PT1H"))->format("o-m-d H:i:s")."'"; break;
-        case "PastDay":
-            $DatePart = "'".(new DateTime())->sub(new DateInterval("P1D"))->format("o-m-d H:i:s")."'"; break;
-        case "PastWeek":
-            $DatePart = "'".(new DateTime())->sub(new DateInterval("P1W"))->format("o-m-d H:i:s")."'"; break;
-        case "PastMonth":
-            $DatePart = "'".(new DateTime())->sub(new DateInterval("P1M"))->format("o-m-d H:i:s")."'"; break;
-        case "PastYear":
-            $DatePart = "'".(new DateTime())->sub(new DateInterval("P1Y"))->format("o-m-d H:i:s")."'"; break;
+        case "PastHour": $DatePart = "'".(new DateTime())->sub(new DateInterval("PT1H"))->format("o-m-d H:i:s")."'"; break;
+        case "PastDay": $DatePart = "'".(new DateTime())->sub(new DateInterval("P1D"))->format("o-m-d H:i:s")."'"; break;
+        case "PastWeek": $DatePart = "'".(new DateTime())->sub(new DateInterval("P1W"))->format("o-m-d H:i:s")."'"; break;
+        case "PastMonth": $DatePart = "'".(new DateTime())->sub(new DateInterval("P1M"))->format("o-m-d H:i:s")."'"; break;
+        case "PastYear": $DatePart = "'".(new DateTime())->sub(new DateInterval("P1Y"))->format("o-m-d H:i:s")."'"; break;
 
         case "Custom": $DatePart = "Custom"; break;
         default: $DatePart = ""; break;
-
     }
 
     // custom Datum filter
@@ -54,32 +47,26 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
             $ToiletIDPart = rtrim($ToiletIDPart, "OR ");
         }
         // Geen toiletten geselecteerd betekent ook dat de query altijd saus terugstuurd
-        if ($ToiletIDPart == "") {
-            return "UnreachableQuery";
-        }
-        $QueryList[2] = "(". $ToiletIDPart . ")";
+        if ($ToiletIDPart == "") { return "UnreachableQuery"; }
+        $QueryList[2] = "(".$ToiletIDPart. ")";
     } else { $QueryList[2] = "";}
 
     // Bron filter
     $OriginPart = "";
-    for ($x = 1; $x < count($OriginArray); $x++) {
-        $OriginPart .= " `Soort` = '".$OriginArray[$x]."' OR ";
-    }
+    for ($x = 1; $x < count($OriginArray); $x++) { $OriginPart .= "`Soort` = '".$OriginArray[$x]."' OR ";}
     $OriginPart = rtrim($OriginPart, "OR ");
-    if ($OriginPart != "") {$OriginPart = "(" .$OriginPart. ")";}
+    if ($OriginPart != "") {$OriginPart = "(".$OriginPart.")";}
     $QueryList[3] = $OriginPart;
 
     // Betrouwbaarheid filter
     $ValidityPart = "";
-    for ($x = 1; $x < count($ValidityArray); $x++) {
-        $ValidityPart .= " `Betrouwbaarheid` = '".$ValidityArray[$x]."' OR ";
-    }
+    for ($x = 1; $x < count($ValidityArray); $x++) { $ValidityPart .= "`Betrouwbaarheid` = '".$ValidityArray[$x]."' OR "; }
     $ValidityPart = rtrim($ValidityPart, "OR ");
-    if ($ValidityPart != "") {$ValidityPart = "(" .$ValidityPart. ")";}
+    if ($ValidityPart != "") {$ValidityPart = "(".$ValidityPart.")";}
     $QueryList[4] = $ValidityPart;
 
 
-    // Kut kut grafjode query appender ik haat mijn leven, telt de hoeveelheid niet lege queries, als die > 0 zijn dan moet de query opgebouwd worden
+    // Kut kut grafjodeballen query appender ik haat mijn leven, telt de hoeveelheid niet lege queries, als die > 0 zijn dan moet de query opgebouwd worden
     // Basis query
     $Query = "SELECT * FROM `SchadeServer`";
     $AmountOfAND = count(array_filter($QueryList, fn($Query) => $Query !== ""));
@@ -98,8 +85,10 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
             }
         }
     }
-    // Nieuwste eerst
-    return $Query . " ORDER by `Datum` DESC;";
+    // Homo sql injectors hebben niets op mij
+    if (strpos($Query, ";")) {return  "UnreachableQuery"; }
+    // Sortarray bepaalt waarop ie filter en hoe
+    return $Query . " ORDER by `$SortArray[0]` $SortArray[1];";
 }
 
 // Voert de query uit, en returned de resultaten.

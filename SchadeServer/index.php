@@ -11,8 +11,7 @@
         require dirname(__DIR__, 1). '/Shared.php'; // SQL query builder en verbeteraar
         ini_set('display_errors', 1); // kan weggecomment worden
         // Default query voor als de url ongeldig is
-        if (($_GET["Date"] == null) || ($_GET["ToiletID"] == null) || ($_GET["Origin"] == null) || ($_GET["Validity"] == null)) { header("Location: index.php?Keyword=&Date=PastDay&Start=&End=&ToiletID%5B%5D=All&ToiletID%5B%5D=0M&ToiletID%5B%5D=0F&ToiletID%5B%5D=1M&ToiletID%5B%5D=1F&ToiletID%5B%5D=2M&ToiletID%5B%5D=2F&ToiletID%5B%5D=3M&ToiletID%5B%5D=3F&ToiletID%5B%5D=0G&Origin%5B%5D=Sensor&Origin%5B%5D=Formulier&Origin%5B%5D=1&Validity%5B%5D=Betrouwbaar&Validity%5B%5D=Eerlijk&Validity%5B%5D=Onbetrouwbaar&Validity%5B%5D=1
-");}
+        if (($_GET["Date"] == null) || ($_GET["ToiletID"] == null) || ($_GET["Origin"] == null) || ($_GET["Validity"] == null) || (($_GET["SortType"] == null || $_GET["SortValue"] == null))) { header("Location: index.php?Keyword=&Date=PastDay&Start=&End=&ToiletID%5B%5D=All&ToiletID%5B%5D=0M&ToiletID%5B%5D=0F&ToiletID%5B%5D=1M&ToiletID%5B%5D=1F&ToiletID%5B%5D=2M&ToiletID%5B%5D=2F&ToiletID%5B%5D=3M&ToiletID%5B%5D=3F&ToiletID%5B%5D=0G&Origin%5B%5D=Sensor&Origin%5B%5D=Formulier&Origin%5B%5D=1&Validity%5B%5D=Betrouwbaar&Validity%5B%5D=Eerlijk&Validity%5B%5D=Onbetrouwbaar&Validity%5B%5D=1&SortValue=Datum&SortType=DESC");}
     ?>
 
     <body>
@@ -71,13 +70,27 @@
                 <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" <?php if(in_array("Eerlijk", $_GET["Validity"])) {echo "checked";}?>/>
                 <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]" value="Onbetrouwbaar" <?php if(in_array("Onbetrouwbaar", $_GET["Validity"])) {echo "checked";}?>/>
             </div>
+
+            <div id="SortDiv">
+                <label for="SortValue">Sorteren</label><select id="SortValue" name="SortValue">
+                    <option value="Datum" <?php if($_GET["SortValue"] == "Datum") {echo "selected";}?>>op datum</option>
+                    <option value="ToiletID" <?php if($_GET["SortValue"] == "ToiletID") {echo "selected";}?>>op datum</option>
+                    <option value="Bron" <?php if($_GET["SortValue"] == "Bron") {echo "selected";}?>>op bron</option>
+                    <option value="Betrouwbaarheid" <?php if($_GET["SortValue"] == "Betrouwbaarheid") {echo "selected";}?>>op betrouwbaarheid</option>
+                </select>
+                <label for="SortType">Volgorde</label><select id="SortType" name="SortType">
+                    <option value="ASC" <?php if($_GET["SortType"] == "ASC") {echo "selected";}?>>oplopend</option>
+                    <option value="DESC" <?php if($_GET["SortType"] == "DESC") {echo "selected";}?>>aflopend</option>
+                </select>
+            </div>
+
             <input type="submit" value="Filter">
         </form>
         <div id="Results">
             <?php
-                $Query = BuildQuery($_GET["Keyword"], array($_GET["Date"], $_GET["Start"], $_GET["End"]), $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"]);
+                $Query = BuildQuery($_GET["Keyword"], array($_GET["Date"], $_GET["Start"], $_GET["End"]), $_GET["ToiletID"], $_GET["Origin"], $_GET["Validity"], array($_GET["SortValue"], $_GET["SortType"]));
                 echo $Query;
-                // bouwt de query op op basis van de filters
+                //bouwt de query op op basis van de filters
                 $Result = QueryExecuter($Query);
                 //voert query uit
                 $Count = 0;
