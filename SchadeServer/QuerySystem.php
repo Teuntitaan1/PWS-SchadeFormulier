@@ -96,3 +96,14 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
     // Nieuwste eerst
     return $Query . " ORDER by `Datum` DESC;";
 }
+
+// Voert de query uit, en returned de resultaten.
+function QueryExecuter($Query) : array {
+    // query uitvoeren en data ophalen
+    global $Connection;
+    $Result = $Connection->query($Query)->fetch_all(MYSQLI_ASSOC);
+    if (count($Result) > 0) {
+        return $Result;
+    }
+    return [];
+}
