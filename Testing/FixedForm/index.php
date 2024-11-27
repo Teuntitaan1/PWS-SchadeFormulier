@@ -1,17 +1,17 @@
-<!--TODO, Header fixen-->
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <title>Schadesysteem-Overzicht-Verbeterd</title>
-    <script src="./script.js"></script>
     <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
 </head>
 
     <?php
         require __DIR__ . '/QuerySystem.php'; // SQL query builder en verbeteraar
         require __DIR__ . '/Shared.php'; // SQL query builder en verbeteraar
         ini_set('display_errors', 1); // kan weggecomment worden
+        // Default query voor als de url ongeldig is
+        if (($_GET["Date"] == null) || ($_GET["ToiletID"] == null) || ($_GET["Origin"] == null) || ($_GET["Validity"] == null)) { header("Location: index.php?Keyword=&Date=PastDay&Start=&End=&ToiletID%5B%5D=All&ToiletID%5B%5D=0M&ToiletID%5B%5D=0F&ToiletID%5B%5D=1M&ToiletID%5B%5D=1F&ToiletID%5B%5D=2M&ToiletID%5B%5D=2F&ToiletID%5B%5D=3M&ToiletID%5B%5D=3F&ToiletID%5B%5D=0G&Origin%5B%5D=Sensor&Origin%5B%5D=Formulier&Validity%5B%5D=Betrouwbaar&Validity%5B%5D=Eerlijk&Validity%5B%5D=Onbetrouwbaar");}
     ?>
 
     <body>
@@ -47,7 +47,7 @@
                 <div id="IDDiv" class="Collapsed">
                     <?php
                     foreach($ToiletList as $ID => $ToiletID) {
-                        if(in_array("Custom", $_GET["ToiletID"])) {
+                        if(in_array($ID, $_GET["ToiletID"])) {
                             echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]' checked/>";
                         }
                         else {
@@ -77,5 +77,9 @@
             echo $Query;
             ?>
         </div>
+    <script>
+        DateChange();
+        ToiletIDChange();
+    </script>
     </body>
 </html>
