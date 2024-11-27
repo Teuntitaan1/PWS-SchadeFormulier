@@ -78,6 +78,7 @@
             ?>
         </div>
     <script>
+        // Reset de juiste divs
         DateChange();
         ToiletIDChange();
     </script>

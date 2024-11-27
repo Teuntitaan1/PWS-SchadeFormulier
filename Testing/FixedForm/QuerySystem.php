@@ -2,15 +2,9 @@
 // Functie die op basis van de filters meegegeven vanuit de schadeserver een query returned die weer uitgevoerd kan worden.
 function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $ValidityArray) : string {
     // Null checks
-    if ($ValidityArray == null || $OriginArray == null) {
-        return "OnreachableQuery";
-    }
-    if ($DateArray[1] == null) {
-        $DateArray[1] = (new DateTime())->sub(new DateInterval("PT1H"))->format("o-m-d H:i:s");
-    }
-    if ($DateArray[2] == null) {
-        $DateArray[2] = (new DateTime())->sub(new DateInterval("P1Y"))->format("o-m-d H:i:s");
-    }
+    if ($ValidityArray == null || $OriginArray == null) { return "OnreachableQuery"; }
+    if ($DateArray[1] == null) { $DateArray[1] = (new DateTime())->sub(new DateInterval("PT1H"))->format("o-m-d H:i:s"); }
+    if ($DateArray[2] == null) { $DateArray[2] = (new DateTime())->sub(new DateInterval("P1Y"))->format("o-m-d H:i:s"); }
 
 
     // Lege querylist die opgevuld wordt met queries, hier wordt doorheengeloopt en geappendeerd tot de $Query string die uiteindelijk geretourneerd wordt.
@@ -46,7 +40,7 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
 
     }
 
-    // Datum filter
+    // custom Datum filter
     if ($DatePart != "") {
         if($DatePart == "Custom") { $QueryList[1] = "`Datum` > '$DateArray[1]' AND `Datum` < '$DateArray[2]'";}
         else { $QueryList[1] = "`Datum` > $DatePart"; }
@@ -55,8 +49,10 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
     // ToiletID filter
     if ($ToiletIDArray[0] != "All") {
         $ToiletIDPart = "";
-        for ($x = 1; $x < count($ToiletIDArray); $x++) {$ToiletIDPart .= "`ToiletID` = '$ToiletIDArray[$x]' OR ";}
-        $ToiletIDPart = rtrim($ToiletIDPart, "OR ");
+        if($ToiletIDArray[0] == "Custom") {
+            for ($x = 1; $x < count($ToiletIDArray); $x++) {$ToiletIDPart .= "`ToiletID` = '$ToiletIDArray[$x]' OR ";}
+            $ToiletIDPart = rtrim($ToiletIDPart, "OR ");
+        }
         // Geen toiletten geselecteerd betekent ook dat de query altijd saus terugstuurd
         if ($ToiletIDPart == "") {
             return "UnreachableQuery";
