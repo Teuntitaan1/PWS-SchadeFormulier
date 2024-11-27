@@ -85,10 +85,11 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
             }
         }
     }
-    // Homo sql injectors hebben niets op mij
-    if (strpos($Query, ";")) {return  "UnreachableQuery"; }
     // Sortarray bepaalt waarop ie filter en hoe
-    return $Query . " ORDER by `$SortArray[0]` $SortArray[1];";
+    $Query .= " ORDER by `$SortArray[0]` $SortArray[1];";
+    // Homo sql injectors hebben niets op mij
+    if (count_chars($Query, ";") > 1) {return  "UnreachableQuery"; }
+    return $Query;
 }
 
 // Voert de query uit, en returned de resultaten.
@@ -97,8 +98,6 @@ function QueryExecuter($Query) : array {
     // query uitvoeren en data ophalen
     global $Connection;
     $Result = $Connection->query($Query)->fetch_all(MYSQLI_ASSOC);
-    if (count($Result) > 0) {
-        return $Result;
-    }
-    return [];
+    if (count($Result) > 0) {return $Result;}
+    else {return [];}
 }
