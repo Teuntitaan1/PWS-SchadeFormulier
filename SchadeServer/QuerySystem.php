@@ -2,7 +2,7 @@
 // Functie die op basis van de filters meegegeven vanuit de schadeserver een query returned die weer uitgevoerd kan worden.
 function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $ValidityArray) : string {
     // Null checks
-    if ($ValidityArray == null || $OriginArray == null) { return "OnreachableQuery"; }
+    if ($ValidityArray == array("1") || $OriginArray == array("1")) { return "OnreachableQuery"; }
     if ($DateArray[1] == null) { $DateArray[1] = (new DateTime())->sub(new DateInterval("PT1H"))->format("o-m-d H:i:s"); }
     if ($DateArray[2] == null) { $DateArray[2] = (new DateTime())->sub(new DateInterval("P1Y"))->format("o-m-d H:i:s"); }
 
