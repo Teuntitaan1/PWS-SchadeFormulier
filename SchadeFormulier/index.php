@@ -15,9 +15,11 @@
         <?php if($_GET["Done"] != "True") {echo "<p>Niet het goede toilet? Pas het toilet <a href='ToiletChooser.php'>hier</a> aan.</p>";} ?>
 
         <!--Evidence form-->
-        <form action="./FormHandler.php" method="post" enctype="multipart/form-data">
+        <form action="<?php echo dirname(__DIR__, 1); ?>./DBHandler.php" method="post" enctype="multipart/form-data">
 
             <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
+            <input type="hidden" name="Source" value="Formulier">
+            <input type="hidden" name="Validity" value="Eerlijk">
 
             <label for="Description">Beschrijving</label>
             <textarea id="Description" name="Description" placeholder="Wat is er precies gebeurd?" minlength="10"></textarea>
