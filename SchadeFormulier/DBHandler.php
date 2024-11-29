@@ -1,13 +1,13 @@
 <?php
 // UUID Generator
-require __DIR__.'/Shared.php';
+require dirname(__DIR__, 1).'/Shared.php';
 
 // Form data ontvangen? Verstuur form
 if (isset($_POST['Source'])) {
     // Is er een bestand verstuurd?
     if (!($_FILES['Evidence'] == null)) {
         // Directory waar hij de bestanden opslaat
-        $FileDir = __DIR__."/Files/";
+        $FileDir =  dirname(__DIR__, 1)."/Files/";
         // Random gegeneneerde naam + extensie
         $EvidenceName = GenerateUUID().".".pathinfo($_FILES["Evidence"]["name"],PATHINFO_EXTENSION);
         // Beweeg bestand de goede kant op
