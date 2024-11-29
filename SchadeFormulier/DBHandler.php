@@ -15,10 +15,7 @@ if (isset($_POST['Source'])) {
     }
     // Zo niet, dan stel je de data in op NULL
     else { $EvidenceName = "NULL"; }
-    
-    // Deel sql injectie anti yeah
-    $UnfilteredDescription = $_POST["Description"].
-    $FilteredDescription = str_replace("'", "", $UnfilteredDescription); $FilteredDescription = str_replace('"', "", $FilteredDescription);    
+
 
     // Query die de data verwerkt.
     $Query = " INSERT INTO `SchadeServer` (`ToiletID`, `Bron`, `Betrouwbaarheid`, `Beschrijving`, `BewijsNaam`) 
