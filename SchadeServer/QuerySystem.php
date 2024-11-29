@@ -53,7 +53,7 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
 
     // Bron filter
     $OriginPart = "";
-    for ($x = 1; $x < count($OriginArray); $x++) { $OriginPart .= "`Soort` = '".$OriginArray[$x]."' OR ";}
+    for ($x = 1; $x < count($OriginArray); $x++) { $OriginPart .= "`Bron` = '".$OriginArray[$x]."' OR ";}
     $OriginPart = rtrim($OriginPart, "OR ");
     if ($OriginPart != "") {$OriginPart = "(".$OriginPart.")";}
     $QueryList[3] = $OriginPart;
@@ -88,7 +88,7 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
     // Sortarray bepaalt waarop ie filter en hoe
     $Query .= " ORDER by `$SortArray[0]` $SortArray[1];";
     // Homo sql injectors hebben niets op mij
-    if (count_chars($Query, ";") > 1) {return  "UnreachableQuery"; }
+    if (substr_count($Query, ";") > 1) {return  "UnreachableQuery"; }
     return $Query;
 }
 

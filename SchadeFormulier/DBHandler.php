@@ -17,10 +17,10 @@ if (isset($_POST['Source'])) {
     else { $EvidenceName = "NULL"; }
 
     // Query die de data verwerkt.
-    $Query = " INSERT INTO `SchadeServer` (`ToiletID`, `Soort`, `Betrouwbaarheid`, `Beschrijving`, `BewijsNaam`) 
+    $Query = " INSERT INTO `SchadeServer` (`ToiletID`, `Bron`, `Betrouwbaarheid`, `Beschrijving`, `BewijsNaam`) 
                 VALUES ('".$_POST["ToiletID"]."', '".$_POST["Source"]."', '".$_POST["Validity"]."', '".$_POST["Description"]."', '$EvidenceName');";
     // SQL injectie poging dan aso wegsturen
-    if (count_chars($Query, ";") > 1) { header("location: ./index.php?ToiletID=".$_POST["ToiletID"]."&Done=False"); exit(); }
+    if (substr_count($Query, ";") > 1) { header("location: ./index.php?ToiletID=".$_POST["ToiletID"]."&Done=False"); exit(); }
     else {$Connection->query($Query); $Connection->close();} // Voer de query uit
 
     // stuur de leerling terug naar index.php, bij sensor request doe niets

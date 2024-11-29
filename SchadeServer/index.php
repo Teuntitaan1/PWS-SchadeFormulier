@@ -74,7 +74,7 @@
             <div id="SortDiv">
                 <label for="SortValue">Sorteren</label><select id="SortValue" name="SortValue">
                     <option value="Datum" <?php if($_GET["SortValue"] == "Datum") {echo "selected";}?>>op datum</option>
-                    <option value="ToiletID" <?php if($_GET["SortValue"] == "ToiletID") {echo "selected";}?>>op datum</option>
+                    <option value="ToiletID" <?php if($_GET["SortValue"] == "ToiletID") {echo "selected";}?>>op toilet</option>
                     <option value="Bron" <?php if($_GET["SortValue"] == "Bron") {echo "selected";}?>>op bron</option>
                     <option value="Betrouwbaarheid" <?php if($_GET["SortValue"] == "Betrouwbaarheid") {echo "selected";}?>>op betrouwbaarheid</option>
                 </select>
@@ -99,7 +99,7 @@
                         echo "
                             <p>Datum: ".$Value["Datum"]."</p>
                             <p>Toilet: ".$ToiletList[$Value["ToiletID"]]."</p>
-                            <p>Bron: ".$Value["Soort"]."</p>
+                            <p>Bron: ".$Value["Bron"]."</p>
                             <p>Omschrijving: ".$Value["Beschrijving"]."</p>
                             <p>Betrouwbaarheid: ".$Value["Betrouwbaarheid"]."</p>
                             ";
