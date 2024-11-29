@@ -92,6 +92,9 @@
                 echo $Query;
                 //bouwt de query op op basis van de filters
                 $Result = QueryExecuter($Query);
+                if (count($Result) < 1) {
+                    echo "<p>Helaas! Er zijn geen resultaten voor deze filtercombinatie.</p>";
+                }
                 //voert query uit
                 $Count = 0;
                 foreach ($Result as $Value) {

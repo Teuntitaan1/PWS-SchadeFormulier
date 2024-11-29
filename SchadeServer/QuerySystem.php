@@ -95,10 +95,13 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
 
 // Voert de query uit, en returned de resultaten.
 function QueryExecuter($Query) : array {
-    if ($Query == "UnreachableQuery") {return [];}
+    $Result = [];
+    if ($Query == "UnreachableQuery") {return $Result;}
     // query uitvoeren en data ophalen
     global $Connection;
-    $Result = $Connection->query($Query)->fetch_all(MYSQLI_ASSOC);
-    if (count($Result) > 0) {return $Result;}
-    else {return [];}
+    $QueryExecuted = $Connection->query($Query);
+    if ($QueryExecuted) {
+        $Result = $QueryExecuted->fetch_all(MYSQLI_ASSOC);
+    }
+    return $Result;
 }
