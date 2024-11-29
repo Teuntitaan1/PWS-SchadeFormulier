@@ -8,7 +8,8 @@ function BuildQuery($Keywords, $DateArray, $ToiletIDArray, $OriginArray, $Validi
 
     // Lege querylist die opgevuld wordt met queries, hier wordt doorheengeloopt en geappendeerd tot de $Query string die uiteindelijk geretourneerd wordt.
     $QueryList = [];
-
+    // Deel sql injectie anti yeah
+    $Keywords = str_replace("'", "", $Keywords); $Keywords = str_replace('"', "", $Keywords);
     // Keywords om op te filteren, als er keywords zijn, voeg ze toe, anders niet
     $Keywords = explode(",", $Keywords);
     if($Keywords[0] != "") {
