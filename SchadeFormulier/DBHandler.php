@@ -19,7 +19,7 @@ if (isset($_POST['Source'])) {
 
     // Query die de data verwerkt.
     $Query = " INSERT INTO `SchadeServer` (`ToiletID`, `Bron`, `Betrouwbaarheid`, `Beschrijving`, `BewijsNaam`) 
-                VALUES ('".$_POST["ToiletID"]."', '".$_POST["Source"]."', '".$_POST["Validity"]."', '".$FilteredDescription."', '$EvidenceName');";
+                VALUES ('".$_POST["ToiletID"]."', '".$_POST["Source"]."', '".$_POST["Validity"]."', '".$_POST["Description"]."', '$EvidenceName');";
     // SQL injectie poging dan aso wegsturen
     if (substr_count($Query, ";") > 1) { header("location: ./index.php?ToiletID=".$_POST["ToiletID"]."&Done=False"); exit(); }
     else {$Connection->query($Query); $Connection->close();} // Voer de query uit
