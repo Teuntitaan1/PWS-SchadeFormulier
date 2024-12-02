@@ -22,7 +22,7 @@
             <input type="hidden" name="Validity" value="Eerlijk">
 
             <label for="Description">Beschrijving</label>
-            <textarea id="Description" name="Description" placeholder="Wat is er precies gebeurd?" minlength="10"></textarea>
+            <textarea id="Description" name="Description" placeholder="Wat is er precies gebeurd?" minlength="10">Bij het <?php echo $ToiletList[$_GET["ToiletID"]]?> zag ik...</textarea>
 
             <input type="file" name="Evidence" accept="image/*">
 
