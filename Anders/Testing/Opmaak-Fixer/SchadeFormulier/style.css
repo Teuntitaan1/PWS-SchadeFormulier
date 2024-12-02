@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    margin: 0;
+    color: #FFFFFF;
+}
+#Title {
+    font-size: 4rem;
+}
+#Toilet, #Subtext{
+    font-style: italic;
+    font-size: 3rem;
+}
+#OtherPageLink, #OtherPageLink a ,#DescriptionDiv label, #DescriptionDiv textarea{
+    color: #000000;
+    font-size: 2rem;
+}
+#OtherPageLink a, #ThanksMessage a{
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+}
+#DescriptionDiv textarea, #DescriptionDiv textarea::placeholder {
+    font-size: 1rem;
+    background-color: #F8F8f8F8;
+}
+#DescriptionDiv textarea{
+    resize: none;
+    overflow: auto;
+    border: black solid 1px;
+    border-radius: 15px;
+}
+#DescriptionDiv label {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+#Header, #Footer {
+    width: 100%;
+    background-color: #49AB35;
+    height: 5%;
+}
+#Footer {
+    position: absolute;
+    bottom: 0;
+    font-size : 1.5rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+#EvidenceCheckmark {
+    position: relative;
+    width: 7rem;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 1rem;
+    margin-left: -7rem;
+    background-color: #49AB35;
+    border-radius: 15px;
+
+}
+#EvidenceButton {
+    width: 40%;
+}
+#SubmitDiv {
+    justify-content: center;
+    display: flex;
+}
+#SubmitButton {
+    background-color: #49AB35;
+    width: 60%;
+    height: 5vh;
+    font-size: 3rem;
+    border-radius: 15px;
+}
+#ThanksMessage, #ThanksMessage a {
+    color: #000000;
+    font-size: 2rem;
+    padding-top: 25vh;
+}
+
+.ToiletIDEntry {
+    margin-top: 5rem;
+}
+.ToiletIDEntry a {
+    font-size: 1rem;
+    border-radius: 15px;
+    padding: .7rem;
+    background-color: #49AB35;
+    text-decoration: none;
+    color: #FFFFFF;
+    width: 60%;
+
+}
+.ToiletIDEntry a:hover {
+    background-color: #5fdf15;
+}

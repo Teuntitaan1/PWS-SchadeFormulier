@@ -45,6 +45,6 @@ $ToiletList = [
     "2F" => "vrouwentoilet op de 2e verdieping",
     "3M" => "mannentoilet op de 3e verdieping",
     "3F" => "vrouwentoilet op de 3e verdieping",
-    "0G" => "genderneutraal toilet",
+    "0G" => "genderneutrale toilet",
 ];
 //TODO File transfer tussen arduino en webserver
