@@ -35,7 +35,7 @@ input, select, textarea {
     background-color: #49AB35;
     color: white;
     height: 100vh;
-    width: 15%;
+    width: 20%;
     left: 0;
     position: sticky;
     top: 0;
@@ -104,4 +104,38 @@ label:hover {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
+}
+#ResultsTable {
+    position: absolute;
+    width: 80%;
+    right: 0;
+    margin-left: 1rem;
+    table-layout: fixed;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+#Results {
+    position: relative;
+    width: 80vw;
+    right: 0;
+    margin-left: 1rem;
+}
+.Entry {
+    width: 25%;
+    height: 25%;
+    background-color: #49AB35;
+    display: flex;
+    justify-content: space-around;
+}
+.Description {
+    text-overflow: ellipsis;
+}
+.CollapserExpander {
+    width: 20%;
+    height: 20%;
+}
+.CollapserExpander img {
+    width: 100%;
+    height: 100%;
 }

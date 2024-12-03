@@ -68,7 +68,7 @@
             <hr>
 
             <div id="OriginDiv">
-                <label for="Origin[]">Bron:</label>
+                <label>Bron:</label>
                 <input type="hidden" name="Origin[]" value="1"/>
                 <br><input type="checkbox" id="Sensor" name="Origin[]" value="Sensor" <?php if(in_array("Sensor", $_GET["Origin"])) {echo "checked";}?>/><label for="Sensor" class="Option">Sensor</label>
                 <br><input type="checkbox" id="Formulier" name="Origin[]" value="Formulier" <?php if(in_array("Formulier", $_GET["Origin"])) {echo "checked";}?>/><label for="Formulier" class="Option">Formulier</label>
@@ -77,7 +77,7 @@
             <hr>
 
             <div id="ValidityDiv">
-                <label for="Validity[]">Betrouwbaarheid:</label>
+                <label>Betrouwbaarheid:</label>
                 <input type="hidden" name="Validity[]" value="1"/>
                 <br><input type="checkbox" id="Betrouwbaar" name="Validity[]" value="Betrouwbaar" <?php if(in_array("Betrouwbaar", $_GET["Validity"])) {echo "checked";}?>/><label for="Betrouwbaar" class="Option">Betrouwbaar</label>
                 <br><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" <?php if(in_array("Eerlijk", $_GET["Validity"])) {echo "checked";}?>/><label for="Eerlijk" class="Option">Eerlijk</label>
@@ -88,7 +88,7 @@
 
             <div id="SortDiv">
                 <div>
-                    <label for="SortValue">Sorteren op:</label>
+                    <label for="SortValue">Sorteer: </label>
                     <select id="SortValue" name="SortValue">
                         <option value="Datum" <?php if($_GET["SortValue"] == "Datum") {echo "selected";}?>>datum</option>
                         <option value="ToiletID" <?php if($_GET["SortValue"] == "ToiletID") {echo "selected";}?>>toilet</option>
@@ -108,21 +108,48 @@
 
             <div id="SubmitButtonDiv"><input id="SubmitButton" name="submit" type="submit" value="Filter"></div>
         </form>
-        <div id="Results">
-            <div class="Entry">
-                <div id="Entry0" class="Entry-Collapsed">
-                    <p>15-11-2024-11:16</p>
-                    <p>Mannentoilet op de begane grond</p>
-                    <p>Bron: Sensor</p>
-                    <p>Omschrijving: Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p>
-                    <p>Betrouwbaarheid: Eerlijk</p>
-                    <p>Bewijs: <a href='./Files/MockFoto.png' target='_blank'>Link</a></p>
-                    <img src='./Files/MockFoto.png' alt='Bewijsfoto'/>
-                </div>
-                <button class="CollapserExpander" onclick="EntryChange('Entry0')" ><img src="./Files/Expand.svg" alt="Expandbutton"></button>
-            </div>
-            
-        </div>
+        <table id="ResultsTable">
+            <tr>
+                <th>Datum:</th>
+                <th>Toilet:</th>
+                <th>Beschrijving:</th>
+                <th>Bron:</th>
+                <th>Betrouwbaarheid:</th>
+                <th>Bewijs:</th>
+            </tr>
+            <tr>
+                <td><p class="Date">15-11-2024-11:16</p></td>
+                <td><p class="ToiledID">0M</p></td>
+                <td><p class="Source">Sensor</p></td>
+                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                <td><p class="Validity">Eerlijk</p></td>
+                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+            </tr>
+            <tr>
+                <td><p class="Date">15-11-2024-11:16</p></td>
+                <td><p class="ToiledID">0M</p></td>
+                <td><p class="Source">Sensor</p></td>
+                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                <td><p class="Validity">Eerlijk</p></td>
+                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+            </tr>
+            <tr>
+                <td><p class="Date">15-11-2024-11:16</p></td>
+                <td><p class="ToiledID">0M</p></td>
+                <td><p class="Source">Sensor</p></td>
+                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                <td><p class="Validity">Eerlijk</p></td>
+                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+            </tr>
+            <tr>
+                <td><p class="Date">15-11-2024-11:16</p></td>
+                <td><p class="ToiledID">0M</p></td>
+                <td><p class="Source">Sensor</p></td>
+                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                <td><p class="Validity">Eerlijk</p></td>
+                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+            </tr>
+        </table>
     <script>
         // Reset de juiste divs
         DateChange();
