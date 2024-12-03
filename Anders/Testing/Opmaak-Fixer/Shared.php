@@ -1,21 +1,23 @@
 <?php
-
-function ValidToiletID($ID): bool {
+function ValidToiletID($ID): bool
+{
     global $ToiletList;
     if ($ID != null) {
-        if ($ToiletList[$ID] != null) { return true; }
+        if ($ToiletList[$ID] != null) {
+            return true;
+        }
     }
     return false;
 }
-$ToiletList = [
-    "0M" => "mannentoilet begane grond",
-    "0F" => "vrouwentoilet begane grond",
-    "1M" => "mannentoilet 1e verdieping",
-    "1F" => "vrouwentoilet 1e verdieping",
-    "2M" => "mannentoilet 2e verdieping",
-    "2F" => "vrouwentoilet 2e verdieping",
-    "3M" => "mannentoilet 3e verdieping",
-    "3F" => "vrouwentoilet 3e verdieping",
-    "0G" => "genderneutraal toilet",
-];
 
+$ToiletList = [
+    "0G" => "genderneutrale toilet",
+    "0M" => "mannentoilet op de begane grond",
+    "0F" => "vrouwentoilet op de begane grond",
+    "1M" => "mannentoilet op de 1e verdieping",
+    "1F" => "vrouwentoilet op de 1e verdieping",
+    "2M" => "mannentoilet op de 2e verdieping",
+    "2F" => "vrouwentoilet op de 2e verdieping",
+    "3M" => "mannentoilet op de 3e verdieping",
+    "3F" => "vrouwentoilet op de 3e verdieping",
+];

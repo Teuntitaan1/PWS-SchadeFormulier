@@ -7,15 +7,19 @@
 
 <body>
     <?php require  dirname(__DIR__, 1). '/Shared.php'; // ToiletID list ?>
-    <h1>Schadeformulier ...</h1>
-    <h3>Kies je toilet:</h3>
+    <div id="Header">
+        <h1 id="Title">@Schadeformulier ...</h1>
+        <h3 id="Subtext">Kies je toilet:</h3>
+    </div>
 
-    <ul>
+    <ul id="ToiletList">
     <?php
         foreach($ToiletList as $ID => $ToiletID)
-        { echo "<li><a href='./index.php?ToiletID=$ID&Done=False'>$ToiletID</a></li>"; }
+        { echo "<li class='ToiletIDEntry'><a href='./index.php?ToiletID=$ID&Done=False'>Het $ToiletID.</a></li>"; }
         ?>
     </ul>
+
+    <div id="Footer">Teun Weijdener & Nathan Esman</div>
 
 </body>
 
