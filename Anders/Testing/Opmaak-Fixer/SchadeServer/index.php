@@ -15,11 +15,15 @@
 
     <body>
         <!--Filter form, hieronder staat de data TODO, form reworken tot een gebruiksvriendelijker systeem-->
-        <form action="./index.php" method="get">
-            <label for="Keyword">Sleutelwoorden</label>
-            <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"];?>'>
+        <form action="./index.php" method="get" id="FilterForm">
+            <h1 id="Title">@Filters</h1>
+            <div id="KeywordDiv">
+                <label for="Keyword">Sleutelwoorden</label>
+                <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"];?>'>
+            </div>
+
             <div id="DateDiv">
-                <label for="Date">Geschiedenis</label>
+                <label for="Date">Wanneer?</label>
                 <select id="Date" name="Date" onchange="DateChange()">
                     <option value="PastHour" <?php if($_GET["Date"] == "PastHour") {echo "selected";}?>>In het afgelopen uur</option>
                     <option value="PastDay" <?php if($_GET["Date"] == "PastDay") {echo "selected";}?>>Vandaag</option>
@@ -30,10 +34,8 @@
                     <option value="Custom" <?php if($_GET["Date"] == "Custom") {echo "selected";}?>>Aangepast..</option>
                 </select>
                 <div id="CustomDateDiv" class="Collapsed">
-                    <label for="Begin">Begin</label>
-                    <input type="date" id="Begin" name="Start" value="<?php echo $_GET["Start"] ?>"/>
-                    <label for="Eind">Eind</label>
-                    <input type="date" id="Eind" name="End"  value="<?php echo $_GET["End"] ?>"/>
+                    <div><label for="Begin">Tussen </label> <input type="date" id="Begin" name="Start" value="<?php echo $_GET["Start"] ?>"/></div>
+                    <div><label for="Eind">En </label><input type="date" id="Eind" name="End"  value="<?php echo $_GET["End"] ?>"/></div>
                 </div>
             </div>
 
@@ -47,27 +49,30 @@
                     <?php
                     foreach($ToiletList as $ID => $ToiletID) {
                         if(in_array($ID, $_GET["ToiletID"])) {
-                            echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]' checked/>";
+                            echo "<input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]' checked/> <label class='Option' for='$ToiletID'>Het $ToiletID</label>";
                         }
                         else {
-                            echo "<label for='$ToiletID'>$ToiletID</label><input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]'/>";
+                            echo "<input type='checkbox' id='$ToiletID' value='$ID' name='ToiletID[]'/> <label class='Option' for='$ToiletID'>Het $ToiletID</label>";
                         }
+                        echo "<br>";
                     }
                     ?>
                 </div>
             </div>
 
             <div id="OriginDiv">
+                <label for="Origin[]">Bron:</label>
                 <input type="hidden" name="Origin[]" value="1"/>
-                <label for="Sensor">Sensor</label><input type="checkbox" id="Sensor" name="Origin[]" value="Sensor" <?php if(in_array("Sensor", $_GET["Origin"])) {echo "checked";}?>/>
-                <label for="Formulier">Formulier</label><input type="checkbox" id="Formulier" name="Origin[]" value="Formulier" <?php if(in_array("Formulier", $_GET["Origin"])) {echo "checked";}?>/>
+                <br><input type="checkbox" id="Sensor" name="Origin[]" value="Sensor" <?php if(in_array("Sensor", $_GET["Origin"])) {echo "checked";}?>/><label for="Sensor" class="Option">Sensor</label>
+                <br><input type="checkbox" id="Formulier" name="Origin[]" value="Formulier" <?php if(in_array("Formulier", $_GET["Origin"])) {echo "checked";}?>/><label for="Formulier" class="Option">Formulier</label>
             </div>
 
             <div id="ValidityDiv">
+                <label for="Validity[]">Betrouwbaarheid:</label>
                 <input type="hidden" name="Validity[]" value="1"/>
-                <label for="Betrouwbaar">Betrouwbaar</label><input type="checkbox" id="Betrouwbaar" name="Validity[]" value="Betrouwbaar" <?php if(in_array("Betrouwbaar", $_GET["Validity"])) {echo "checked";}?>/>
-                <label for="Eerlijk">Eerlijk</label><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" <?php if(in_array("Eerlijk", $_GET["Validity"])) {echo "checked";}?>/>
-                <label for="Onbetrouwbaar">Onbetrouwbaar</label><input type="checkbox" id="Onbetrouwbaar" name="Validity[]" value="Onbetrouwbaar" <?php if(in_array("Onbetrouwbaar", $_GET["Validity"])) {echo "checked";}?>/>
+                <br><input type="checkbox" id="Betrouwbaar" name="Validity[]" value="Betrouwbaar" <?php if(in_array("Betrouwbaar", $_GET["Validity"])) {echo "checked";}?>/><label for="Betrouwbaar" class="Option">Betrouwbaar</label>
+                <br><input type="checkbox" id="Eerlijk" name="Validity[]" value="Eerlijk" <?php if(in_array("Eerlijk", $_GET["Validity"])) {echo "checked";}?>/><label for="Eerlijk" class="Option">Eerlijk</label>
+                <br><input type="checkbox" id="Onbetrouwbaar" name="Validity[]" value="Onbetrouwbaar" <?php if(in_array("Onbetrouwbaar", $_GET["Validity"])) {echo "checked";}?>/><label for="Onbetrouwbaar" class="Option">Onbetrouwbaar</label>
             </div>
 
             <div id="SortDiv">
@@ -83,17 +88,22 @@
                 </select>
             </div>
 
-            <input type="submit" value="Filter">
+            <input id="SubmitButton" name="submit" type="submit" value="Filter">
         </form>
         <div id="Results">
             <div class="Entry">
-                <p>Datum: ".$Value["Datum"]."</p>
-                <p>Toilet: ".$ToiletList[$Value["ToiletID"]]."</p>
-                <p>Bron: ".$Value["Bron"]."</p>
-                <p>Omschrijving: ".$Value["Beschrijving"]."</p>
-                <p>Betrouwbaarheid: ".$Value["Betrouwbaarheid"]."</p>
-                <p>Bewijs: <a href='Sigma' target='_blank'>Link</a></p>
+                <div id="Entry0" class="Entry-Collapsed">
+                    <p>15-11-2024-11:16</p>
+                    <p>Mannentoilet op de begane grond</p>
+                    <p>Bron: Sensor</p>
+                    <p>Omschrijving: Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p>
+                    <p>Betrouwbaarheid: Eerlijk</p>
+                    <p>Bewijs: <a href='./MockFoto.png' target='_blank'>Link</a></p>
+                    <img src='./Files/MockFoto.png' alt='Bewijsfoto'/>
+                </div>
+                <button class="CollapserExpander" onclick="EntryChange('Entry0')" ><img src="./Files/Expand.svg" alt="Expandbutton"></button>
             </div>
+            
         </div>
     <script>
         // Reset de juiste divs

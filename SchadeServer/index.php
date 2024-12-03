@@ -110,6 +110,7 @@
                             // ervanuit gaande dat de server altijd op https is, anders http
                             $FileUrl = CleanFileURL("https://".$_SERVER['SERVER_NAME'].dirname(__DIR__, 1)."/Files/".$Value["BewijsNaam"]);
                             echo "<p>Bewijs: <a href='$FileUrl' target='_blank'>Link</a></p>";
+                            echo "<img src='".$FileUrl."' alt='Bewijsfoto'/>";
                         }
                     echo "</div>";
                     // Fixt de entryid van de div

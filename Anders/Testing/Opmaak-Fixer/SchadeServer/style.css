@@ -1,8 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
+* {
+    font-family: 'Open Sans', sans-serif;
+}
 .Collapsed {
     display: none;
 }
 .Extended {
     display: block;
+}
+
+body {
+    display: flex;
+    margin: 0;
+    padding: 0%;
+}
+#Title {
+    font-size: 1.3rem;
+    text-align: center;
+    font-style: italic;
+}
+#FilterForm {
+    display: flexbox;
+    justify-content: center;
+    background-color: #49AB35;
+    color: white;
+    height: 100vh;
+    width: 15%;
+    left: 0;
+    position: sticky;
+    top: 0;
+}
+#FilterForm label:not(.Option) {
+    font-weight: bold;
+    font-size: 1rem;
+}
+.Option {
+    font-size: 0.8rem;
+	color: black;
+}
+#FilterForm>div {
+    
+}
+#KeywordDiv {
+
+}
+#CustomDateDiv div {
+    display: flexbox;
+    justify-content: space-between;
+}
+#ToiletIDDiv{
+}
+#OriginDiv {
+
+}
+#ValidityDiv {
+
+}
+#SortDiv {
+
 }
