@@ -15,7 +15,7 @@
 
     <body>
         <!--Filter form, hieronder staat de data TODO, form reworken tot een gebruiksvriendelijker systeem-->
-        <form action="./index.php" method="get">
+        <form action="./index.php" method="get" id="FilterForm">
             <label for="Keyword">Sleutelwoorden</label>
             <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"];?>'>
             <div id="DateDiv">
@@ -86,6 +86,7 @@
             <input type="submit" value="Filter">
         </form>
         <div id="Results">
+            <p id="ResultsCount"><strong>0</strong> resultaten</p>
             <div class="Entry">
                 <p>Datum: ".$Value["Datum"]."</p>
                 <p>Toilet: ".$ToiletList[$Value["ToiletID"]]."</p>
@@ -95,6 +96,7 @@
                 <p>Bewijs: <a href='Sigma' target='_blank'>Link</a></p>
             </div>
         </div>
+
     <script>
         // Reset de juiste divs
         DateChange();
