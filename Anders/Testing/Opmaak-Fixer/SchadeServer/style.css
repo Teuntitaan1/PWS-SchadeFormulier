@@ -1,26 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-* {
-    font-family: 'Open Sans', sans-serif;
-}
-.Collapsed {
-    display: none;
-}
-.Extended {
-    display: block;
-}
+* { font-family: 'Open Sans', sans-serif; }
+.Collapsed { display: none; }
+.Extended {display: block; }
 
 body {
     display: flex;
     margin: 0;
-    padding: 0%;
+    padding: 0;
+}
+hr {
+    width: 75%;
+
 }
 #Title {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
     text-align: center;
     font-style: italic;
 }
+#SubTitle {
+    font-size: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.8;
+}
+input, select, textarea {
+    border-radius: 5px;
+    border: none;
+}
 #FilterForm {
-    display: flexbox;
     justify-content: center;
     background-color: #49AB35;
     color: white;
@@ -34,28 +44,64 @@ body {
     font-weight: bold;
     font-size: 1rem;
 }
+
 .Option {
     font-size: 0.8rem;
 	color: black;
 }
 #FilterForm>div {
-    
+    padding-left: 0.2rem;
 }
 #KeywordDiv {
-
+    padding-top: 1rem;
+    text-align: center;
 }
-#CustomDateDiv div {
-    display: flexbox;
+#DateDiv, #ToiletIDDiv {
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
     justify-content: space-between;
 }
+#CustomDateDiv div {
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: space-between;
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
 #ToiletIDDiv{
+    margin-top: .5rem;
 }
-#OriginDiv {
-
+label:hover {
+    font-weight: bold;
 }
-#ValidityDiv {
 
+#ValidityDiv, #OriginDiv {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 #SortDiv {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+#SortDiv > div {
+    display: flex;
+    justify-content: space-between;
+}
 
+#SubmitButton {
+    background: #FFFFFF;
+    color: black;
+    width: 10rem;
+    height: 3rem;
+}
+#SubmitButton:hover {
+    font-weight: bold;
+    transition: .05s ease-in-out;
+}
+#SubmitButtonDiv {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
 }
