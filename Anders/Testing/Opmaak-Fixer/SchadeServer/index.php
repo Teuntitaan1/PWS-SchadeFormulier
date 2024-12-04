@@ -16,8 +16,8 @@
     <body>
         <!--Filter form, hieronder staat de data TODO, form reworken tot een gebruiksvriendelijker systeem-->
         <form action="./index.php" method="get" id="FilterForm">
-            <h1 id="Title">@Schadesyteem</h1>
-            <h1 id="SubTitle">@Filters</h1>
+            <h1 id="Title">@Schadesysteem</h1>
+            <h1 id="SubTitle">Filters</h1>
             <div id="KeywordDiv">
                 <label for="Keyword">Sleutelwoorden</label>
                 <input id=Keyword type="text" name="Keyword" placeholder="Appel, Banaan, Druif" value='<?php echo $_GET["Keyword"];?>'>
@@ -113,12 +113,12 @@
                 <tr id="TableHeader">
                     <th>Datum:</th>
                     <th>Toilet:</th>
-                    <th>Beschrijving:</th>
                     <th>Bron:</th>
+                    <th>Beschrijving:</th>
                     <th>Betrouwbaarheid:</th>
                     <th>Bewijs:</th>
                 </tr>
-                <tr class="Entry">
+                <tr class="Entry" id="Entry0" onclick="EntryChange(0)">
                     <td><p class="Date">15-11-2024-11:16</p></td>
                     <td><p class="ToiledID">0M</p></td>
                     <td><p class="Source">Sensor</p></td>
@@ -126,7 +126,19 @@
                     <td><p class="Validity">Eerlijk</p></td>
                     <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
                 </tr>
-                <tr class="Entry">
+                <tr class="SubEntry SubEntry-Collapsed" id="SubEntry0">
+                    <td>
+                        <div class="SubEntryDiv">
+                            <div class="InfoDiv">
+                                <p><strong>Waar?</strong> <i>Het mannentoilet op de begane grond</i></p>
+                                <h3>Wat is er gebeurd?</h3>
+                                <p class="DescriptionExpanded">nwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p>
+                            </div>
+                            <img src="Files/MockFoto.png" class="Evidence" alt="Evidence">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="Entry" id="Entry1" onclick="EntryChange(1)">
                     <td><p class="Date">15-11-2024-11:16</p></td>
                     <td><p class="ToiledID">0M</p></td>
                     <td><p class="Source">Sensor</p></td>
@@ -134,7 +146,19 @@
                     <td><p class="Validity">Eerlijk</p></td>
                     <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
                 </tr>
-                <tr class="Entry">
+                <tr class="SubEntry SubEntry-Collapsed" id="SubEntry1">
+                    <td>
+                        <div class="SubEntryDiv">
+                            <div class="InfoDiv">
+                                <p><strong>Waar?</strong> <i>Het mannentoilet op de begane grond</i></p>
+                                <h3>Wat is er gebeurd?</h3>
+                                <p class="DescriptionExpanded">nwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p>
+                            </div>
+                            <img src="Files/MockFoto.png" class="Evidence" alt="Evidence">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="Entry" id="Entry2" onclick="EntryChange(2)">
                     <td><p class="Date">15-11-2024-11:16</p></td>
                     <td><p class="ToiledID">0M</p></td>
                     <td><p class="Source">Sensor</p></td>
@@ -142,16 +166,20 @@
                     <td><p class="Validity">Eerlijk</p></td>
                     <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
                 </tr>
-                <tr class="Entry">
-                    <td><p class="Date">15-11-2024-11:16</p></td>
-                    <td><p class="ToiledID">0M</p></td>
-                    <td><p class="Source">Sensor</p></td>
-                    <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
-                    <td><p class="Validity">Eerlijk</p></td>
-                    <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+                <tr class="SubEntry SubEntry-Collapsed" id="SubEntry2">
+                    <td>
+                        <div class="SubEntryDiv">
+                            <div class="InfoDiv">
+                                <p><strong>Waar?</strong> <i>Het mannentoilet op de begane grond</i></p>
+                                <h3>Wat is er gebeurd?</h3>
+                                <p class="DescriptionExpanded">nwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p>
+                            </div>
+                            <img src="Files/MockFoto.png" class="Evidence" alt="Evidence">
+                        </div>
+                    </td>
                 </tr>
             </table>
-            <p id="ResultsCount"><strong>4</strong> resultaten.</p>
+            <p id="ResultsCount"><strong>4</strong> resultaten. :)</p>
         </div>
     <script>
         // Reset de juiste divs

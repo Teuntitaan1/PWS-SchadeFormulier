@@ -37,10 +37,8 @@ input, select, textarea {
     background-color: #49AB35;
     color: white;
     width: 20%;
-    left: 0;
-    position: absolute;
+    border-radius: 0 0 15px 0;
     padding-bottom: 10%;
-    top: 0;
 }
 #FilterForm label:not(.Option) {
     font-weight: bold;
@@ -127,13 +125,34 @@ input, select, textarea {
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.Description:hover {
-    background: #666666;
-}
-tr:hover {
-    font-weight: bold;
-}
-tr:nth-child(even) {
+.Entry {
     background-color: #dddddd;
+    user-select: none;
 }
-
+.Entry:hover {
+    font-weight: bold;
+    background-color: #bbbbbb;
+}
+.SubEntry-Expanded {
+    display: block;
+}
+.SubEntry-Collapsed {
+    display: none;
+}
+.SubEntryDiv {
+    width: 79vw;
+    height: 30rem;
+    background-color: #f6f6f6;
+    text-align: left;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+}
+.InfoDiv {
+    width: 50%;
+}
+.Evidence {
+    width: 40%;
+    height: 80%;
+}

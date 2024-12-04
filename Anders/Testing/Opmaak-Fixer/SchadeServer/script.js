@@ -18,3 +18,15 @@ function ToiletIDChange() {
         document.getElementById("IDDiv").classList.add("Collapsed");
     }
 }
+function EntryChange(EntryID) {
+    let Subentry = document.getElementById("SubEntry"+EntryID);
+    if (Subentry.classList.contains("SubEntry-Expanded")) {
+        Subentry.classList.remove("SubEntry-Expanded");
+        Subentry.classList.add("SubEntry-Collapsed");
+    }
+    else {
+        Subentry.classList.add("SubEntry-Expanded");
+        Subentry.classList.remove("SubEntry-Collapsed");
+    }
+    console.log("Test")
+}
