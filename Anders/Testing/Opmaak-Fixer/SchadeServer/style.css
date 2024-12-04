@@ -34,10 +34,9 @@ input, select, textarea {
 }
 #FilterForm {
     justify-content: center;
-    position: fixed;
-    left: 0;
-    top: 0;
     height: 100%;
+    padding-bottom: 10%;
+    border-radius: 0 0 1rem 0;
     background-color: #49AB35;
     color: white;
     width: 20%;

@@ -44,7 +44,7 @@ if (!(ValidToiletID($_GET["ToiletID"]))) { header("location: ToiletChooser.php")
     <div id="SubmitDiv"><input type="submit" name="Send" value="Verstuur" id="SubmitButton" style="display:  <?php if ($_GET["Done"] == "True") {echo "none";} else {echo "block";} ?>"></div>
 </form>
 
-<?php if ($_GET["Done"] == "True") {echo "<p id='ThanksMessage'>Bedankt voor het invullen :) We gaan meteen aan de bak! Nog een schadeformulier invullen? Klik <a href='./index.php?ToiletID=".$_GET["ToiletID"]."&Done=False'>hier</a>.</p>";} ?>
+<?php if ($_GET["Done"] == "True") {echo "<div id='ThanksMessageDiv'><p id='ThanksMessage'>Bedankt voor het invullen :) We gaan meteen aan de bak! Nog een schadeformulier invullen? Klik <a href='./index.php?ToiletID=".$_GET["ToiletID"]."&Done=False'>hier</a>.</p></div>";} ?>
 
 <div id="Footer">Teun Weijdener & Nathan Esman</div>
 </body>

@@ -78,10 +78,15 @@
     border-radius: 15px;
     margin-bottom: 10%;
 }
+#ThanksMessageDiv {
+    display: flex;
+    justify-content: center;
+}
 #ThanksMessage, #ThanksMessage a {
     color: #000000;
     font-size: 2rem;
     padding-top: 25vh;
+    width: 50%;
 }
 #ToiletList {
     width: 100%;
