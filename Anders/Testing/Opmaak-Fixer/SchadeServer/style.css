@@ -10,7 +10,9 @@ body {
 }
 hr {
     width: 75%;
-
+}
+label:hover {
+    font-weight: bold;
 }
 #Title {
     font-size: 1.5rem;
@@ -34,10 +36,10 @@ input, select, textarea {
     justify-content: center;
     background-color: #49AB35;
     color: white;
-    height: 100vh;
     width: 20%;
     left: 0;
-    position: sticky;
+    position: absolute;
+    padding-bottom: 10%;
     top: 0;
 }
 #FilterForm label:not(.Option) {
@@ -73,10 +75,6 @@ input, select, textarea {
 #ToiletIDDiv{
     margin-top: .5rem;
 }
-label:hover {
-    font-weight: bold;
-}
-
 #ValidityDiv, #OriginDiv {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -89,9 +87,9 @@ label:hover {
     display: flex;
     justify-content: space-between;
 }
-
 #SubmitButton {
     background: #FFFFFF;
+    margin-top: 5%;
     color: black;
     width: 10rem;
     height: 3rem;
@@ -105,37 +103,37 @@ label:hover {
     display: flex;
     justify-content: center;
 }
-#ResultsTable {
+#ResultsDiv {
     position: absolute;
     width: 80%;
     right: 0;
     margin-left: 1rem;
     table-layout: fixed;
+    border-collapse: collapse;
+    text-align: center;
+}
+#ResultsTable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+#TableHeader {
+    background-color: #441D66;
+    color: white;
+    height: 2rem;
+}
+.Description {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.Description:hover {
+    background: #666666;
+}
+tr:hover {
+    font-weight: bold;
 }
 tr:nth-child(even) {
     background-color: #dddddd;
 }
-#Results {
-    position: relative;
-    width: 80vw;
-    right: 0;
-    margin-left: 1rem;
-}
-.Entry {
-    width: 25%;
-    height: 25%;
-    background-color: #49AB35;
-    display: flex;
-    justify-content: space-around;
-}
-.Description {
-    text-overflow: ellipsis;
-}
-.CollapserExpander {
-    width: 20%;
-    height: 20%;
-}
-.CollapserExpander img {
-    width: 100%;
-    height: 100%;
-}
+

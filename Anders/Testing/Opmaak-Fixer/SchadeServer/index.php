@@ -108,48 +108,51 @@
 
             <div id="SubmitButtonDiv"><input id="SubmitButton" name="submit" type="submit" value="Filter"></div>
         </form>
-        <table id="ResultsTable">
-            <tr>
-                <th>Datum:</th>
-                <th>Toilet:</th>
-                <th>Beschrijving:</th>
-                <th>Bron:</th>
-                <th>Betrouwbaarheid:</th>
-                <th>Bewijs:</th>
-            </tr>
-            <tr>
-                <td><p class="Date">15-11-2024-11:16</p></td>
-                <td><p class="ToiledID">0M</p></td>
-                <td><p class="Source">Sensor</p></td>
-                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
-                <td><p class="Validity">Eerlijk</p></td>
-                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
-            </tr>
-            <tr>
-                <td><p class="Date">15-11-2024-11:16</p></td>
-                <td><p class="ToiledID">0M</p></td>
-                <td><p class="Source">Sensor</p></td>
-                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
-                <td><p class="Validity">Eerlijk</p></td>
-                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
-            </tr>
-            <tr>
-                <td><p class="Date">15-11-2024-11:16</p></td>
-                <td><p class="ToiledID">0M</p></td>
-                <td><p class="Source">Sensor</p></td>
-                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
-                <td><p class="Validity">Eerlijk</p></td>
-                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
-            </tr>
-            <tr>
-                <td><p class="Date">15-11-2024-11:16</p></td>
-                <td><p class="ToiledID">0M</p></td>
-                <td><p class="Source">Sensor</p></td>
-                <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
-                <td><p class="Validity">Eerlijk</p></td>
-                <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
-            </tr>
-        </table>
+        <div id="ResultsDiv">
+            <table id="ResultsTable">
+                <tr id="TableHeader">
+                    <th>Datum:</th>
+                    <th>Toilet:</th>
+                    <th>Beschrijving:</th>
+                    <th>Bron:</th>
+                    <th>Betrouwbaarheid:</th>
+                    <th>Bewijs:</th>
+                </tr>
+                <tr class="Entry">
+                    <td><p class="Date">15-11-2024-11:16</p></td>
+                    <td><p class="ToiledID">0M</p></td>
+                    <td><p class="Source">Sensor</p></td>
+                    <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                    <td><p class="Validity">Eerlijk</p></td>
+                    <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+                </tr>
+                <tr class="Entry">
+                    <td><p class="Date">15-11-2024-11:16</p></td>
+                    <td><p class="ToiledID">0M</p></td>
+                    <td><p class="Source">Sensor</p></td>
+                    <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                    <td><p class="Validity">Eerlijk</p></td>
+                    <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+                </tr>
+                <tr class="Entry">
+                    <td><p class="Date">15-11-2024-11:16</p></td>
+                    <td><p class="ToiledID">0M</p></td>
+                    <td><p class="Source">Sensor</p></td>
+                    <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                    <td><p class="Validity">Eerlijk</p></td>
+                    <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+                </tr>
+                <tr class="Entry">
+                    <td><p class="Date">15-11-2024-11:16</p></td>
+                    <td><p class="ToiledID">0M</p></td>
+                    <td><p class="Source">Sensor</p></td>
+                    <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
+                    <td><p class="Validity">Eerlijk</p></td>
+                    <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
+                </tr>
+            </table>
+            <p id="ResultsCount"><strong>4</strong> resultaten.</p>
+        </div>
     <script>
         // Reset de juiste divs
         DateChange();
