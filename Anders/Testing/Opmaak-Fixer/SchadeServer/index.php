@@ -138,46 +138,6 @@
                         </div>
                     </td>
                 </tr>
-                <tr class="Entry" id="Entry1" onclick="EntryChange(1)">
-                    <td><p class="Date">15-11-2024-11:16</p></td>
-                    <td><p class="ToiledID">0M</p></td>
-                    <td><p class="Source">Sensor</p></td>
-                    <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
-                    <td><p class="Validity">Eerlijk</p></td>
-                    <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
-                </tr>
-                <tr class="SubEntry SubEntry-Collapsed" id="SubEntry1">
-                    <td>
-                        <div class="SubEntryDiv">
-                            <div class="InfoDiv">
-                                <p><strong>Waar?</strong> <i>Het mannentoilet op de begane grond</i></p>
-                                <h3>Wat is er gebeurd?</h3>
-                                <p class="DescriptionExpanded">nwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p>
-                            </div>
-                            <img src="Files/MockFoto.png" class="Evidence" alt="Evidence">
-                        </div>
-                    </td>
-                </tr>
-                <tr class="Entry" id="Entry2" onclick="EntryChange(2)">
-                    <td><p class="Date">15-11-2024-11:16</p></td>
-                    <td><p class="ToiledID">0M</p></td>
-                    <td><p class="Source">Sensor</p></td>
-                    <td><p class="Description">Er is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p></td>
-                    <td><p class="Validity">Eerlijk</p></td>
-                    <td><p class="Link"><a href='./Files/MockFoto.png' target='_blank'>Link</a></p></td>
-                </tr>
-                <tr class="SubEntry SubEntry-Collapsed" id="SubEntry2">
-                    <td>
-                        <div class="SubEntryDiv">
-                            <div class="InfoDiv">
-                                <p><strong>Waar?</strong> <i>Het mannentoilet op de begane grond</i></p>
-                                <h3>Wat is er gebeurd?</h3>
-                                <p class="DescriptionExpanded">nwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevapoto2nw-i[gnw-rutnv-uerntcg-wrntyt-unwritungpiwrtdnghpijEr is mogelijk gevaped in de toiletten, dit is niet met 100% zekerheid te zeggen.</p>
-                            </div>
-                            <img src="Files/MockFoto.png" class="Evidence" alt="Evidence">
-                        </div>
-                    </td>
-                </tr>
             </table>
             <p id="ResultsCount"><strong>4</strong> resultaten. :)</p>
         </div>

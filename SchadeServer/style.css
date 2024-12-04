@@ -1,7 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+* { font-family: 'Open Sans', sans-serif; }
+.Collapsed { display: none; }
+.Extended {display: block; }
 
-.Collapsed {
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+hr {
+    width: 75%;
+}
+label:hover {
+    font-weight: bold;
+}
+#Title {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+    font-style: italic;
+}
+#SubTitle {
+    font-size: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.8;
+}
+input, select, textarea {
+    border-radius: 5px;
+    border: none;
+}
+#FilterForm {
+    justify-content: center;
+    background-color: #49AB35;
+    color: white;
+    width: 20%;
+    border-radius: 0 0 15px 0;
+    padding-bottom: 10%;
+}
+#FilterForm label:not(.Option) {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.Option {
+    font-size: 0.8rem;
+	color: black;
+}
+#FilterForm>div {
+    padding-left: 0.2rem;
+}
+#KeywordDiv {
+    padding-top: 1rem;
+    text-align: center;
+}
+#DateDiv, #ToiletIDDiv {
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    justify-content: space-between;
+}
+#CustomDateDiv div {
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    justify-content: space-between;
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+#ToiletIDDiv{
+    margin-top: .5rem;
+}
+#ValidityDiv, #OriginDiv {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+#SortDiv {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+#SortDiv > div {
+    display: flex;
+    justify-content: space-between;
+}
+#SubmitButton {
+    background: #FFFFFF;
+    margin-top: 5%;
+    color: black;
+    width: 10rem;
+    height: 3rem;
+}
+#SubmitButton:hover {
+    font-weight: bold;
+    transition: .05s ease-in-out;
+}
+#SubmitButtonDiv {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+#ResultsDiv {
+    position: absolute;
+    width: 80%;
+    right: 0;
+    margin-left: 1rem;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: center;
+}
+#ResultsTable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+#TableHeader {
+    background-color: #441D66;
+    color: white;
+    height: 2rem;
+}
+.Description {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.Entry {
+    background-color: #dddddd;
+    user-select: none;
+}
+.Entry:hover {
+    font-weight: bold;
+    background-color: #bbbbbb;
+}
+.SubEntry-Expanded {
+    display: block;
+}
+.SubEntry-Collapsed {
     display: none;
 }
-.Extended {
-    display: block;
+.SubEntryDiv {
+    width: 79vw;
+    height: 30rem;
+    background-color: #f6f6f6;
+    text-align: left;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+}
+.InfoDiv {
+    width: 50%;
+}
+.Evidence {
+    width: 40%;
+    height: 80%;
 }
