@@ -143,8 +143,11 @@
                                         <h3>Wat is er gebeurd?</h3>
                                         <p class='DescriptionExpanded'>".$Value["Beschrijving"]."</p>
                                     </div>
-                                    <img src='$URL' class='Evidence' alt='Evidence'>
-                                </div>
+                        ";
+                        if (strpos(GetMimeType($URL), "image/") === 0) { echo "<img src='$URL' class='Evidence' alt='Evidence'/>"; }
+                        elseif (strpos(GetMimeType($URL), "video/") === 0) { echo "<video src='$URL' class='Evidence' />"; }
+                        else {echo "<p>Geen bewijs meegeleverd.</p>";}
+                        echo "</div>
                             </td>
                         </tr>
                         ";

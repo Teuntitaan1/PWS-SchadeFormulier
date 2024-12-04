@@ -34,11 +34,13 @@ input, select, textarea {
 }
 #FilterForm {
     justify-content: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
     background-color: #49AB35;
     color: white;
     width: 20%;
-    border-radius: 0 0 15px 0;
-    padding-bottom: 10%;
 }
 #FilterForm label:not(.Option) {
     font-weight: bold;
@@ -130,7 +132,6 @@ input, select, textarea {
     user-select: none;
 }
 .Entry:hover {
-    font-weight: bold;
     background-color: #bbbbbb;
 }
 .SubEntry-Expanded {
@@ -140,7 +141,7 @@ input, select, textarea {
     display: none;
 }
 .SubEntryDiv {
-    width: 79vw;
+    width: 80vw;
     height: 30rem;
     background-color: #f6f6f6;
     text-align: left;

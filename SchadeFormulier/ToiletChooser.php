@@ -12,12 +12,12 @@
     <h3 id="Subtext">Kies je toilet:</h3>
 </div>
 
-<ul id="ToiletList">
+<div id="ToiletList">
     <?php
     foreach($ToiletList as $ID => $ToiletID)
-    { echo "<li class='ToiletIDEntry'><a href='./index.php?ToiletID=$ID&Done=False'>Het $ToiletID.</a></li>"; }
+    { echo "<div class='ToiletIDEntry'><a href='./index.php?ToiletID=$ID&Done=False'>Het $ToiletID.</a></div>"; }
     ?>
-</ul>
+</div>
 
 <div id="Footer">Teun Weijdener & Nathan Esman</div>
 

@@ -37,17 +37,19 @@
     font-weight: bold;
 }
 
-#Header, #Footer {
+#Header {
     width: 100%;
     background-color: #49AB35;
-    height: 5%;
+    height: 15%;
 }
 #Footer {
-    position: absolute;
+    width: 100%;
+    position: fixed;
     bottom: 0;
+    background-color: #49AB35;
     font-size : 1.5rem;
     font-style: italic;
-    opacity: 0.9;
+    height: 5%;
 }
 
 #EvidenceCheckmark {
@@ -71,29 +73,46 @@
 #SubmitButton {
     background-color: #49AB35;
     width: 60%;
-    height: 5vh;
+    height: 5%;
     font-size: 3rem;
     border-radius: 15px;
+    margin-bottom: 10%;
 }
 #ThanksMessage, #ThanksMessage a {
     color: #000000;
     font-size: 2rem;
     padding-top: 25vh;
 }
-
-.ToiletIDEntry {
-    margin-top: 5rem;
+#ToiletList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Zorg voor horizontale centrering */
+    margin: 0; /* Verwijder eventuele marges */
+    padding: 0;
 }
-.ToiletIDEntry a {
-    font-size: 1rem;
+.ToiletIDEntry {
+    display: flex;
+    height: 10vh;
+    margin-top: 1vh;
+    width: 75%;
     border-radius: 15px;
-    padding: .7rem;
     background-color: #49AB35;
+    justify-content: center;
+    align-items: center;
+}
+.ToiletIDEntry:last-child {
+    margin-bottom: 10%;
+}
+
+.ToiletIDEntry a {
+    font-size: 2rem;
+    font-weight: bold;
     text-decoration: none;
     color: #FFFFFF;
-    width: 60%;
-
 }
-.ToiletIDEntry a:hover {
-    background-color: #5fdf15;
+.ToiletIDEntry:hover {
+    background-color: #441D66;
+    transition: 0.1s ease-in-out;
 }
