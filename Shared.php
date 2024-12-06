@@ -52,7 +52,6 @@ function GetMimeType($FileUrl): string {
             'mpg' => 'video/mpeg',
             'mpeg' => 'video/mpeg',
         ];
-
         $extensie = strtolower(pathinfo($FileUrl, PATHINFO_EXTENSION));
         return $mime_types[$extensie];
 }
