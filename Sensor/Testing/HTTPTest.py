@@ -18,6 +18,6 @@ with open(FileUrl, 'rb') as File:
     FILE = {'Evidence': (File.name, File)}
     # Verstuur het POST-verzoek
     Request = requests.post(URL, data=DATA, files=FILE)
-    print(Request)
+
 
 

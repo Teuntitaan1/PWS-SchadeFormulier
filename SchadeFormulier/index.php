@@ -23,7 +23,7 @@ if (!(ValidToiletID($_GET["ToiletID"]))) { header("location: ToiletChooser.php")
     <div id="HiddenDiv">
         <input type="hidden" name="ToiletID" value=<?php echo $_GET["ToiletID"]; ?>>
         <input type="hidden" name="Source" value="Formulier">
-        <input type="hidden" name="Validity" value="Eerlijk">
+        <input type="hidden" name="Validity" value="Betrouwbaar">
         <input type="file" name="Evidence" id="EvidenceInput" accept="image/*" onchange="CheckFileUpload()" style="display: none;">
     </div>
 

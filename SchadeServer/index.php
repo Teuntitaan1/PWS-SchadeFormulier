@@ -145,7 +145,7 @@
                                     </div>
                         ";
                         if (strpos(GetMimeType($URL), "image/") === 0) { echo "<img src='$URL' class='Evidence' alt='Evidence'/>"; }
-                        elseif (strpos(GetMimeType($URL), "video/") === 0) { echo "<video src='$URL' class='Evidence' />"; }
+                        elseif (strpos(GetMimeType($URL), "video/") === 0) { echo "<video class='Evidence' controls><source src='$URL' type='".GetMimeType($URL)."'></video>"; }
                         else {echo "<p>Geen bewijs meegeleverd.</p>";}
                         echo "</div>
                             </td>
