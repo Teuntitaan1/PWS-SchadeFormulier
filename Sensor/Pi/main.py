@@ -27,8 +27,9 @@ SensorConfig = {
 Arduino = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 Arduino.reset_input_buffer()
 
-# Camera connectie via bedrade camera aan Raspberry pi. Gebruikt om video's mee te maken en dit op te sturen.
-Camera = Picamera2()
+if SensorConfig["TakeEvidence"]:
+    # Camera connectie via bedrade camera aan Raspberry pi. Gebruikt om video's mee te maken en dit op te sturen.
+    Camera = Picamera2()
 
 # Preset data die later aangepast wordt.
 DATA = {
@@ -47,8 +48,10 @@ while True:
 
         ShouldSentPost = True
         # Cooldown om overbelasting te voorkomen
-        if ((time.time() - LastSentPost) < SensorConfig["IncidentCooldown"]):
+        if (time.time() - LastSentPost) < SensorConfig["IncidentCooldown"]:
             ShouldSentPost = False
+        else:
+            LastSentPost = time.time()
 
         # Voer de juiste data door op basis van de ontvangen string
         match Command:
@@ -72,24 +75,26 @@ while True:
         if ShouldSentPost:
             print("Een POST request aan het sturen.")
 
-        # video functionaliteit
-        if SensorConfig["TakeEvidence"]:
-            # Wacht eventjes met het maken van een video zodat de daders beter gepakt worden
-            time.sleep(SensorConfig["Delay"])
-            #TODO Dit werkt niet maar ik weet niet waarom, niet belangrijk voor het einde van het project.
-            Camera.start_and_record_video(SensorConfig["EvidenceName"], duration=5)
-            time.sleep(10)
-            # Open het bestand in binaire modus en stuur het via een POST-verzoek
-            with open(SensorConfig["EvidenceName"], 'rb') as File:
-                # Verstuur het POST-verzoek
-                Request = requests.post(SensorConfig['ServerUrl'], data=DATA, files={'Evidence': (File.name, File)})
-            # Verwijderd het bestand zodat de ruimte bespaart blijft
-            os.remove(SensorConfig["EvidenceName"])
+            # video functionaliteit
+            if SensorConfig["TakeEvidence"]:
+                # Wacht eventjes met het maken van een video zodat de daders beter gepakt worden
+                time.sleep(SensorConfig["Delay"])
+                #TODO Dit werkt niet maar ik weet niet waarom, niet belangrijk voor het einde van het project.
+                Camera.start_and_record_video(SensorConfig["EvidenceName"], duration=5)
+                time.sleep(10)
+                # Open het bestand in binaire modus en stuur het via een POST-verzoek
+                with open(SensorConfig["EvidenceName"], 'rb') as File:
+                    # Verstuur het POST-verzoek
+                    Request = requests.post(SensorConfig['ServerUrl'], data=DATA, files={'Evidence': (File.name, File)})
+                # Verwijderd het bestand zodat de ruimte bespaart blijft
+                os.remove(SensorConfig["EvidenceName"])
 
+            else:
+                Request = requests.post(SensorConfig['ServerUrl'], data=DATA)
+                
+            if Request.status_code == 200:
+                print("Met succes een POST request gestuurd")
+            else:
+                print("Zonder succes een POST request gestuurd")
         else:
-            Request = requests.post(SensorConfig['ServerUrl'], data=DATA)
-            
-        if Request.status_code == 200:
-            print("Met succes een POST request gestuurd")
-        else:
-            print("Zonder succes een POST request gestuurd")
+            print("Niets aan het doen")
