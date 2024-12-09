@@ -18,8 +18,9 @@ SensorConfig = {
     "ServerUrl" : "https://informatica.ghlyceum.nl/users/39506/PHP/PWS/SchadeFormulier/DBHandler.php",
     "ToiledID" : "0M",
     "EvidenceName" : "Bewijs.mp4",
-    "TakeEvidence" : True,
-    "Delay" : 10
+    "TakeEvidence" : False,
+    "Delay" : 10, 
+    "IncidentCooldown" : 30
 }
 
 # Arduino connectie via serial, later via bluetooth. Stuurt commando's naar rapsberry pi om de database te updaten.
@@ -46,7 +47,7 @@ while True:
 
         ShouldSentPost = True
         # Cooldown om overbelasting te voorkomen
-        if ((time.time() - LastSentPost) < 30):
+        if ((time.time() - LastSentPost) < SensorConfig["IncidentCooldown"]):
             ShouldSentPost = False
 
         # Voer de juiste data door op basis van de ontvangen string
@@ -75,7 +76,7 @@ while True:
         if SensorConfig["TakeEvidence"]:
             # Wacht eventjes met het maken van een video zodat de daders beter gepakt worden
             time.sleep(SensorConfig["Delay"])
-            
+            #TODO Dit werkt niet maar ik weet niet waarom, niet belangrijk voor het einde van het project.
             Camera.start_and_record_video(SensorConfig["EvidenceName"], duration=5)
             time.sleep(10)
             # Open het bestand in binaire modus en stuur het via een POST-verzoek
