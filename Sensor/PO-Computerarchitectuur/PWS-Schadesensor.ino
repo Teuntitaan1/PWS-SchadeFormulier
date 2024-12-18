@@ -8,9 +8,9 @@ float HumidityThreshold = 5.0;        // Minimale luchtvochtigheidsstijging (%)
 int VOCThreshold = 100;          // VOC-drempelwaarde (afhankelijk van sensor, meestal in ppm)
 
 // Variabelen voor basismeting
-float BaseTemperature = 0.0;
-float BaseHumidity = 0.0;
-int BaseVOC = 0;
+float BaseTemperature;
+float BaseHumidity;
+int BaseVOC;
 
 // Sensoren
 Adafruit_SHT4x HT_Sensor;
