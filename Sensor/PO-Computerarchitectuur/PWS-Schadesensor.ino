@@ -2,10 +2,6 @@
 #include "Adafruit_SHT4x.h"
 
 // Variablen
-// CONFIG
-bool CheckSound = true;
-bool CheckVape = true;
-
 // Minimale waardestijging voordat ie iets meldt.
 float TemperatureThreshold = 1.0;       // Minimale temperatuurstijging (°C)
 float HumidityThreshold = 5.0;        // Minimale luchtvochtigheidsstijging (%)
@@ -22,25 +18,22 @@ Adafruit_SGP30 VOC_Sensor;
 
 void setup() {
   Serial.begin(9600);
+  // Humidity en Temperature Sensor activeren
+  HT_Sensor.begin();
+  VOC_Sensor.begin();
 
-  if (CheckVape) {
-    // Humidity en Temperature Sensor activeren
-    HT_Sensor.begin();
-    VOC_Sensor.begin();
+  // HT Sensor functionaliteit
+  sensors_event_t Humidity, Temperature;
+  HT_Sensor.getEvent(&Humidity, &Temperature); // Vul de variablen met nieuwe data.
+  BaseTemperature = Temperature.temperature;
+  BaseHumidity = Humidity.relative_humidity;
 
-    // HT Sensor functionaliteit
-    sensors_event_t Humidity, Temperature;
-    HT_Sensor.getEvent(&Humidity, &Temperature); // Vul de variablen met nieuwe data.
-    BaseTemperature = Temperature.temperature;
-    BaseHumidity = Humidity.relative_humidity;
+  // Voc Sensor functionaliteit
+  VOC_Sensor.setHumidity(getAbsoluteHumidity(BaseTemperature, BaseHumidity));
+  // Verkrijgt VOC en CO2, we gebruiken VOC
+  VOC_Sensor.IAQmeasure();
+  BaseVOC = VOC_Sensor.TVOC;
 
-    // Voc Sensor functionaliteit
-    VOC_Sensor.setHumidity(getAbsoluteHumidity(BaseTemperature, BaseHumidity));
-    // Verkrijgt VOC en CO2, we gebruiken VOC
-    VOC_Sensor.IAQmeasure();
-    BaseVOC = VOC_Sensor.TVOC;
-
-  }
 }
 
 void loop() {
